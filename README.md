@@ -11,6 +11,9 @@ Supported Websites
 (List all supported websites here)
 
 
+## Documentation
+- [commands](/docs/commands.md)
+
 ## Installation
 (Provide instructions on how to install the parser based on its implementation. This might involve specifying dependencies or setup steps.)
 
@@ -20,6 +23,14 @@ Supported Websites
 - Command Line: If your parser is a command-line tool, provide instructions on how to run it with different options (e.g., specifying the problem URL).
 - API: If your parser offers an API, document the API calls and how to integrate it with your code.
 - Integration with Editors/IDEs: If your parser integrates with specific editors or IDEs, explain how to set it up and use it within that environment.
+
+## TODO list
+- [ ] testing system
+- [ ] Local code execution
+- [ ] Writing a c++ template
+  - [ ] writing document by example
+- [ ] writing `assets` folder
+
 
 ## Contributing
 We welcome contributions to this project!
