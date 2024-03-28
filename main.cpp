@@ -6,7 +6,7 @@
 #define vi vector < int >
 #define me(a, x) memset(a, x, sizeof(a))
 #define ull unsigned long long
-#define ld __float128
+#define ld long double
 #define pb emplace_back
 using namespace std;
 const int N = 1 << 20;
@@ -35,5 +35,6 @@ int main() {
 	ios :: sync_with_stdio(false);
 	cin.tie(0); cout.tie(0);
 	// int t; cin >> t; while(t--) Main();
+	Main();
 	return 0;
 }

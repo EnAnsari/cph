@@ -12,7 +12,8 @@ Supported Websites
 
 
 ## Documentation
-- [commands](/docs/commands.md)
+- [Commands](/docs/commands.md)
+- [Template description](/docs/template.md)
 
 ## Installation
 (Provide instructions on how to install the parser based on its implementation. This might involve specifying dependencies or setup steps.)
