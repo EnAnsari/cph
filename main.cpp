@@ -9,24 +9,10 @@
 #define ld long double
 #define pb emplace_back
 using namespace std;
-const int N = 1 << 20;
-int n, k;
-bool s[N], t[N];
-int pre[N];
+
 void Reads() {
 
 }
-int win[N];
-int lp[N], rp[N];
-const int M = 1e4 + 7;
-int pool[N], fi[M], ls[M];
-int G[M][M];
-int dp[M];
-int val[N];
-int mxp[N];
-int stk[N], top;
-int hop[M][M];
-int seg[M];
 void Main() {
 	Reads();
 

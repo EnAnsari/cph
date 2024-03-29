@@ -2,7 +2,7 @@
 On this page, an attempt has been made to deal with parser commands in a classified manner.
 
 ## basic definations
-- **FILE_ADDRESS**: address of `main.py` in `cp-parser` folder.
+- **FILE_ADDRESS**: address of `parser.py` in `cp-parser` folder.
 
 
 ## list of commands
@@ -11,7 +11,7 @@ On this page, an attempt has been made to deal with parser commands in a classif
   - [initializing a question](#initializing-a-question)
 - test case
   - [updating test case](#updating-test-case)
-  - adding test case
+  - [adding test case](#adding-test-case)
 - judge
   - normal judge and test
   - just run
@@ -47,7 +47,7 @@ python3 [FILE_ADDRESS] -initialize question [FILE_NAME_WITHOUT_CPP]
 
 without parser folder:
 ```bash
-python3 [FILE_ADDRESS] -initialize question [FILE_NAME_WITHOUT_CPP] -env=off
+python3 [FILE_ADDRESS] -initialize question [FILE_NAME_WITHOUT_CPP] -env off
 ```
 
 ---
@@ -57,7 +57,56 @@ update test case from directory files
 ./.parse/r -testcase update
 ```
 
+auto rename of test case file names
+```bash
+./.parse/r -testcase refactor
+```
+
+adding a format for refactor
+```bash
+./.parse/r -testcase addformat
+```
+
+rewrite test case
+```bash
+./.parse/r -testcase rewrite -p [PROBLEMNAME] -t all
+```
+rewrite a custom test case
+```bash
+./.parse/r -testcase rewrite -p [PROBLEMNAME] -t [TESTNUMBER]
+```
+
+deleting test case
+rewrite test case
+```bash
+./.parse/r -testcase flush -p [PROBLEMNAME] -t all
+```
+rewrite a custom test case
+```bash
+./.parse/r -testcase flush -p [PROBLEMNAME] -t [TESTNUMBER]
+```
+
 status of test case
 ```bash
 ./.parse/r -testcase status
+```
+---
+
+### adding test case
+add normal test case
+```bash
+./.parse/r -testcase addmul -p [PROBLEM_NAME]
+```
+
+add test case by test count (like codeforces)
+```bash
+./.parse/r -testcase addsingle -p [PROBLEM_NAME]
+```
+
+opening test case folder
+```bash
+./.parse/r -testcase opendir -p all
+```
+```bash
+./.parse/r -testcase opendir -p [PROBLEM_NAME]
 ```
