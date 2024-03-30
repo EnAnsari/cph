@@ -59,10 +59,10 @@ update test case from directory files
 
 auto rename of test case file names
 ```bash
-./.parse/r -testcase refactor
+./.parse/r -testcase reformat
 ```
 
-adding a format for refactor
+adding a format for format
 ```bash
 ./.parse/r -testcase addformat
 ```
