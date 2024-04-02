@@ -1631,59 +1631,18 @@ def search(arg, problem):
 
 # ========================================================== main
 
-""" Help message
+help_message = [
+    f"{colored_text('[-initialize|-i]', 'yellow')} {colored_text('[-CONTEST_NAME]', 'cyan')} {colored_text('[-problemnum][-problemcustom]', 'yellow')} {colored_text('[NUM_OR_NAMES]', 'cyan')} {colored_text('[-env]', 'yellow')} {colored_text('[off]', 'cyan')}",
+    f"{colored_text('[-testcase|-t]', 'yellow')} {colored_text('[status][show][addmul][addsingle|adds][update][reformat][addformat][flush][domjudge]', 'green')}",
+    f"{colored_text('[-testcase|-t]', 'yellow')} {colored_text('[multitosingle|m2s][opendir][addtester][removetester|rmtester][testtester|ttt]', 'green')}",
+    f"{colored_text('[-info]', 'yellow')}",
+    f"{colored_text('[-change]', 'yellow')} {colored_text('[-timing|-time][-memory][-status][-language|-lang][-sign][contest]', 'yellow')}",
+    f"{colored_text('[-problem|-p]', 'yellow')} {colored_text('[PROBLEMNAME]', 'cyan')}",
+    f"{colored_text('[-ending|-end]', 'yellow')} {colored_text('[removemain|rmmain][removeetc|rmetc][removeraw|rmraw][markdown|md]', 'green')}",
+    f"{colored_text('[-search]', 'yellow')} {colored_text('[NAME|', 'cyan')}{colored_text('io|ioall]', 'green')}",
+    f"{colored_text('[-asset|-as]', 'yellow')} {colored_text('[DESTINATION_FILE_LINE_OR_BOTH-(temp.cpp:32)]', 'cyan')} {colored_text('[SRC|+]', 'cyan')} {colored_text('[-p|-problem]', 'yellow')} {colored_text('[PROBLEMNAME]', 'cyan')}",
+]
 
-    + -initialize [CONTEST_NAME]: create a new competition directory with the given name and problems
-    + -problemnum: number of problems to implement
-    + -problemcustom: name of problems to implement
-    + -env [off]: create a parser environment in the competition directory
-    + -info | -i : show information about the competition
-
-    + -testcase: about out test cases
-    +    status: show the status of the test cases
-    +    update: update the test cases
-    +    reformat: reformat the test cases
-    +    addformat: add format to the test cases
-    +    opendir: open the test cases folder
-    +    flush: flush the test cases
-    +    addsingle: add single test case
-    +    addmulti: add multi test case
-    +     domjudge: reformat domjudge test case by zip file
-    +    show: showing test case
-        m2s: multi to single
-    + -test | -t : choose a testcase
-    + -problem | -p : choose a problem
-
-    + -judge | -j : judge the code
-    + -timing: show the time of the code
-    + -just [compile | run]: just compile or run the code
-    + -test | -t [off]: without test
-    *note: this argument does not need to -problem args
-    
-    + -change : change the code
-    + -problem | -p : choose a problem
-    + -language | -lang : new language to choose
-    + -status [done | accept | running | raw | out | stock]: new status to choose
-    + -timing: new time to choose
-    + -memory: new memory to choose
-    + -sign [on | off | rewrite]: sign of the problem
-    + -contest: adding descrition and link of the contest
-
-    + -ending: ending the competition
-    +     markdown: create a markdown file of the contest
-    +     removeraw: remove the raw status of the problem to out status
-    +     removemain: remove the main file of the problems
-    +     removeetc: remove the etc files of the problems except the main code
-    
-    + -assets: create a assets code for the contest
-    +    [line to add | file to add(by line or without)] [address of asset | main.cpp (template)]
-    +    -byetc: adding header and main func too
-
-    + -search:
-    +     io-base
-    +     other
-
-"""
 
 def main():
     parser = argparse.ArgumentParser(description='commands of parser information')
@@ -1831,8 +1790,63 @@ def main():
     elif args.problem:
         open_problem(args.problem.upper())
     else:
-        print(f"{colored_text('Error', 'red')}: invalid argument")
+        print('\n'.join(help_message))
 
 
 if __name__ == "__main__":
     main()
+
+
+""" Help message
+
+    -initialize [CONTEST_NAME]: create a new competition directory with the given name and problems
+    -problemnum: number of problems to implement
+    -problemcustom: name of problems to implement
+    -env [off]: create a parser environment in the competition directory
+    -info | -i : show information about the competition
+
+    -testcase: about out test cases
+       status: show the status of the test cases
+       update: update the test cases
+       reformat: reformat the test cases
+       addformat: add format to the test cases
+       opendir: open the test cases folder
+       flush: flush the test cases
+       addsingle: add single test case
+       addmulti: add multi test case
+        domjudge: reformat domjudge test case by zip file
+       show: showing test case
+        m2s: multi to single
+    -test | -t : choose a testcase
+    -problem | -p : choose a problem
+
+    -judge | -j : judge the code
+    -timing: show the time of the code
+    -just [compile | run]: just compile or run the code
+    -test | -t [off]: without test
+    *note: this argument does not need to -problem args
+    
+    -change : change the code
+    -problem | -p : choose a problem
+    -language | -lang : new language to choose
+    -status [done | accept | running | raw | out | stock]: new status to choose
+    -timing: new time to choose
+    -memory: new memory to choose
+    -sign [on | off | rewrite]: sign of the problem
+    -contest: adding descrition and link of the contest
+
+    -ending: ending the competition
+        markdown: create a markdown file of the contest
+        removeraw: remove the raw status of the problem to out status
+        removemain: remove the main file of the problems
+        removeetc: remove the etc files of the problems except the main code
+    
+    -assets: create a assets code for the contest
+       [line to add | file to add(by line or without)] [address of asset | main.cpp (template)]
+       -byetc: adding header and main func too
+
+    -search:
+        io-base
+        other
+
+"""
