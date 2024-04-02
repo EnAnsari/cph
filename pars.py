@@ -1636,7 +1636,7 @@ help_message = [
     f"{colored_text('[-testcase|-t]', 'yellow')} {colored_text('[status][show][addmul][addsingle|adds][update][reformat][addformat][flush][domjudge]', 'green')}",
     f"{colored_text('[-testcase|-t]', 'yellow')} {colored_text('[multitosingle|m2s][opendir][addtester][removetester|rmtester][testtester|ttt]', 'green')}",
     f"{colored_text('[-info]', 'yellow')}",
-    f"{colored_text('[-change]', 'yellow')} {colored_text('[-timing|-time][-memory][-status][-language|-lang][-sign][contest]', 'yellow')}",
+    f"{colored_text('[-change]', 'yellow')} {colored_text('[-timing|-time][-memory][-status][-language|-lang][-sign][-contest]', 'yellow')}",
     f"{colored_text('[-problem|-p]', 'yellow')} {colored_text('[PROBLEMNAME]', 'cyan')}",
     f"{colored_text('[-ending|-end]', 'yellow')} {colored_text('[removemain|rmmain][removeetc|rmetc][removeraw|rmraw][markdown|md]', 'green')}",
     f"{colored_text('[-search]', 'yellow')} {colored_text('[NAME|', 'cyan')}{colored_text('io|ioall]', 'green')}",
