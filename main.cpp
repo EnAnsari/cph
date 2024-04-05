@@ -7,8 +7,10 @@
 #define me(a, x) memset(a, x, sizeof(a))
 #define ull unsigned long long
 #define ld long double
-#define pb emplace_back
+#define ps push_back
+#define pp pop_back
 using namespace std;
+const int N = 1e5 + 5;
 
 void Reads() {
 
