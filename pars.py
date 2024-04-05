@@ -990,7 +990,7 @@ def judge(args):
                     expected_output = f.read().strip()
             with open(input_test_path, 'r') as f:
                     expected_input = f.read().strip()
-            if test['probelms'][problem]['tester']:
+            if test['problems'][problem]['tester']:
                 tester_path = os.path.join(PARSERDIR, 'samples', problem, 'test.py')
                 spec = importlib.util.spec_from_file_location("tester", tester_path)
                 testerfile = importlib.util.module_from_spec(spec)
@@ -1024,7 +1024,7 @@ def judge(args):
                 print(result['output'])
             else:
                 print(colored_text('your output is empty', 'red'))
-            if test['probelms'][problem]['tester']:
+            if test['problems'][problem]['tester']:
                 print(f"{colored_text('tester result: ', 'magneta')}{colored_text('passed', 'green') if status_condition else colored_text('rejected', 'red')}")
         status_message = colored_text('PASS', 'light green') if total_status else colored_text('REJECT', 'light red')
         print(colored_text(f'\ntotal status question {problem}:', 'yellow') , status_message)
@@ -1532,8 +1532,8 @@ def is_equal_testcase(test_des, problem_des, path_des, test_src, problem_src):
             output_sample = [o.strip() for o in output_sample]
         cur_line_input = 1
         cur_line_output = 0
-        for lines in test_des['probelms'][problem_des]['status']:
-            input_line, output_line = lines.split()
+        for lines in test_des['problems'][problem_des]['status']:
+            input_line, output_line = lines[0], lines[1]
             list1_in.append(input_sample[cur_line_input: cur_line_input + input_line])
             list1_out.append(input_sample[cur_line_output: cur_line_output + output_line])
     else:
@@ -1557,8 +1557,8 @@ def is_equal_testcase(test_des, problem_des, path_des, test_src, problem_src):
             output_sample = [o.strip() for o in output_sample]
         cur_line_input = 1
         cur_line_output = 0
-        for lines in test_src['probelms'][problem_src]['status']:
-            input_line, output_line = lines.split()
+        for lines in test_src['problems'][problem_src]['status']:
+            input_line, output_line = lines[0], lines[1]
             list2_in.append(input_sample[cur_line_input: cur_line_input + input_line])
             list2_out.append(input_sample[cur_line_output: cur_line_output + output_line])
     else:
