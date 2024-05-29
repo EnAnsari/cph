@@ -2,9 +2,7 @@
 #include <queue>
 using namespace std;
 
-void showpq(
-	priority_queue<int, vector<int>, greater<int> > g)
-{
+void showpq(priority_queue<int, vector<int>, greater<int> > g) {
 	while (!g.empty()) {
 		cout << ' ' << g.top();
 		g.pop();
@@ -12,8 +10,7 @@ void showpq(
 	cout << '\n';
 }
 
-void showArray(int* arr, int n)
-{
+void showArray(int* arr, int n) {
 	for (int i = 0; i < n; i++) {
 		cout << arr[i] << ' ';
 	}
