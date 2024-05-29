@@ -31,7 +31,6 @@ EMAIL = 'Rahmat2022a@gmail.com'
 WEBSITE = 'https://enansari.github.io'
 MYNAME = 'Rahmat'
 
-
 ADDTODB = 1
 DEBUG = 1
 # if DEBUG:
@@ -275,7 +274,7 @@ def initializer(args):
         exit(1)
 
     folder_names = name_problems(args)
-    
+
     if args.env != 'off':
         create_env(parser_dir, folder_names, name, signflag, lang)
         create_run_script(parser_dir)
@@ -511,7 +510,8 @@ def testcase_addmul_by_problem(problem, test):
         return
     count = test['problems'][problem]['count']
     print(f"num of testcase question {problem} now: {colored_text(count, 'yellow')}")
-    num = int(input(colored_text(f"Enter num of new Test case for question {problem}: ", 'light cyan')))
+    num = input(colored_text(f"Enter num of new Test case for question {problem}: ", 'light cyan'))
+    num = 0 if not num else int(num)
     for i in range(count + 1, num + count + 1):
         input_sections = input_testcase(f'input of test case num {i} question {problem}')
         if not input_sections:
