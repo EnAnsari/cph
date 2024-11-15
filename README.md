@@ -1,37 +1,25 @@
-# Competitive Programming Parser
-This repository contains a competitive programming parser.
+# Competitive Programming Helper
 
-The parser helps you extract problem statements, test cases, and other relevant information from online judges, making it easier to focus on solving the problems.
-
-## Features
-Parses problem statements and test cases from various online judges.
-Saves extracted information in a user-friendly format.
-(Optional - Include any additional features your parser offers)
-Supported Websites
-(List all supported websites here)
-
-
-## Documentation
-- [Commands](/docs/commands.md)
-- [Template description](/docs/template.md)
-
-## Installation
-(Provide instructions on how to install the parser based on its implementation. This might involve specifying dependencies or setup steps.)
-
-## Usage
-(Explain how to use the parser.  Here are some common approaches to consider including):
-
-- Command Line: If your parser is a command-line tool, provide instructions on how to run it with different options (e.g., specifying the problem URL).
-- API: If your parser offers an API, document the API calls and how to integrate it with your code.
-- Integration with Editors/IDEs: If your parser integrates with specific editors or IDEs, explain how to set it up and use it within that environment.
-
-## TODO list
-- [ ] testing system
-- [ ] Local code execution
-- [ ] Writing a c++ template
-  - [ ] writing document by example
-- [ ] writing `assets` folder
-
+# TODO list
+- [ ] Create a professional README
+  - [ ] features
+  - [ ] documentations (in docs folder)
+  - [ ] installation (should use requirement file)
+  - [ ] usage (how to use)
+  - [ ] how to contribute
+  - [ ] future works
+- [ ] Creating a powerful and scalable and simple structure
+- [ ] Create a `gateway` to the program through each match (create a `shortcut` or `globalize` the program)
+- [ ] Create a process to add `test cases` (all simple - give suggestion from gpt)
+- [ ] Create a `judge` button to test tests (without time)
+- [ ] Creating a process for using ready-made code or `asset`
+- [ ] Create a process to `connect different matches` to the main parser (add match address to a specific file)
+- [ ] Creating a parser for `quera` matches
+- [ ] Creating a parser for `codeforces` matches
+- [ ] Auxiliary facilities
+  - [ ] Adding `Python` code to the code
+  - [ ] Adding `signatures` to codes
+  - [ ] Adding `wise sayings` to the code
 
 ## Contributing
 We welcome contributions to this project!
