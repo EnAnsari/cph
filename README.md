@@ -1,5 +1,64 @@
 # Competitive Programming Helper
 
+## Prerequisites
+1. Python 3.6 or later installed on your system.
+2. `pip` (Python's package manager) installed.
+3. Access to a terminal/command prompt.
+4. Administrator/root access. (for globlizing)
+
+## Installation
+We're going to go through a multi-step installation here. First, we'll download and install the prerequisites, then we'll try to make things easier by installing the global version of the program. Finally, we'll explain how to uninstall it.
+<details><summary><strong>local Installation</strong></summary><br>
+
+**1. Clone the Repository**
+First, clone this repository to your local machine:
+```bash
+git clone https://github.com/enansari/cph
+cd chp
+```
+
+**2. Set Up the Virtual Environment**
+#### ubuntu
+1. Ensure Python's venv module is installed:
+  ```bash
+  sudo apt update
+  sudo apt install python3-venv
+  ```
+2. Create a virtual environment:
+  ```bash
+  python3 -m venv env
+  ```
+3. Activate the virtual environment:
+  ```bash
+  source env/bin/activate
+  ```
+4. Install dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+#### windows
+1. Open Command Prompt or PowerShell.
+2. Create a virtual environment:
+  ```bash
+  python -m venv env
+  ```
+3. Activate the virtual environment:
+  ```bash
+  env\Scripts\activate
+  ```
+4. Install dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+***hint: To deactivate the virtual environment:***
+  ```bash
+  deactivate
+  ```
+
+</details><br>
+
+
 # TODO list
 - [ ] Create a professional README
   - [ ] features

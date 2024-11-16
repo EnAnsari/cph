@@ -162,6 +162,7 @@ cython_debug/
 
 .vscode/
 .parser/
+old/
 temp/
 db.txt
 *.exe

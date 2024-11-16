@@ -1,2 +1,0 @@
-in/input*.txt out/output*.txt
-input*.txt output*.txt
