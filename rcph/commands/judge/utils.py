@@ -28,6 +28,11 @@ def getExecutiveFile():
     return exe
 
 
+def execute(exe, input_content):
+    proc = subprocess.run([exe], input=input_content, text=True, capture_output=True)
+    output = proc.stdout.strip()
+    return output
+
 def judge(problem):
     problem_folder = getFolder(problem)
     exe = getExecutiveFile()
@@ -39,9 +44,9 @@ def judge(problem):
         print(colored_text(f"Running Test {t}...", 'magneta'))
         with open(os.path.join(problem_folder, str(t) + '.in')) as fin, open(os.path.join(problem_folder, str(t) + '.ans')) as fans:
             input_content = fin.read().strip()
+            output = execute(exe, input_content)
             expected = fans.read().strip()
-            proc = subprocess.run([exe], input=input_content, text=True, capture_output=True)
-            output = proc.stdout.strip()
+
             if compareText(output, expected):
                 print(f"{colored_text('Input:', 'cyan')}\n{input_content}\n{colored_text('Expected:', 'cyan')}\n{expected}")
                 print(colored_text(f"Test {t} PASSED!\n", 'green', 'bold'))
@@ -59,3 +64,17 @@ def judge(problem):
             print('status:', colored_text('Accept\n', 'green', 'bold'))
         else:
             print('status:', colored_text('Wrong Answer\n', 'red', 'bold'))
+
+
+def executeInput():
+    input_path = os.path.join(os.getcwd(), 'input.txt')
+    if not os.path.exists(input_path):
+        raise Exception('input.txt file does not exist!')
+    with open(input_path, 'r') as fin:
+        input_content = fin.read().strip()
+    
+    exe = getExecutiveFile()
+    output = execute(exe, input_content)
+    
+    with open(os.path.join(os.getcwd(), 'output.txt'), 'w') as fout:
+        fout.write(output.strip())
