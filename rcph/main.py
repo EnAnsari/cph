@@ -1,22 +1,17 @@
-import argparse
-from rcph.commands.hello import run as hello_runner
+from rcph.utils import print_error
+from rcph.core.parser import create_parser
 
 def main():
-    parser = argparse.ArgumentParser(description="cph CLI Tool")
+    # try:
+        parser = create_parser()
+        args = parser.parse_args()
 
-    subparsers = parser.add_subparsers(dest="command", help="Subcommands")
-
-    hello_parser = subparsers.add_parser("hello", help="Print hello world")
-    hello_parser.set_defaults(func=hello_runner)
-
-    args = parser.parse_args()
-
-    if args.command:
-        # Execute the function associated with the command
-        args.func()
-    else:
-        parser.print_help()
+        if args.command:
+            args.func(args)
+        else:
+            parser.print_help()
+    # except Exception as e:
+    #     print_error(str(e))
 
 if __name__ == "__main__":
     main()
-    
