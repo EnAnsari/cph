@@ -1,10 +1,13 @@
+DEVMODE = 1
 MAXSIGNLINE = 20
 
 # in current contest folder (./)
 CONTEST_INFO_JSON = 'info.json'
 TESTCASE_FOLDER = 'tc'
 RCPH_FOLDER = '.rcph'
+PARENT_PORTAL = 'parent.txt'
 TEMPLATE_CPP = 'template.cpp'
+LASTJUDGE = 'lastjudge.txt'
 
 # in parser folder (component folder)
 COMPONENTS = 'components'

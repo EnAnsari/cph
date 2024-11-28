@@ -2,6 +2,7 @@ from rcph.utils import os, shutil, json
 from rcph.config.constant import *
 from rcph.config.make import run as makeCofingJson
 from rcph.utils.sign import makeSign
+from rcph.utils.get import getTemplate, getGlobaltConfig
 
 def makeFolder(folder_path):
     if not os.path.exists(folder_path):
@@ -45,16 +46,12 @@ def testCaseMaker(folder_path, contest):
         os.mkdir(os.path.join(tc, problem))
 
 
-def makeRcphFolder(folder_path, contest):
+def makeRcphFolder(folder_path, contest, parent):
     rcph_folder = os.path.join(folder_path, RCPH_FOLDER)
     os.mkdir(rcph_folder)
-    makeCofingJson(rcph_folder, folder_path, contest)
+    makeCofingJson(rcph_folder, folder_path, contest, parent)
     testCaseMaker(rcph_folder, contest)
 
-def getTemplate():
-    here = os.path.dirname(__file__)
-    template = os.path.join(here, *['..'] * 3, COMPONENTS, TEMPLATE_FOLDER, COMPONENT_TEMPLATE_CPP)
-    return template
 
 def makeTemplateCode(folder_path):
     template = getTemplate()
@@ -67,9 +64,13 @@ def makeProblemCodes(folder_path, contest):
     with open(template, 'r') as template_file:
         template = template_file.read()
 
+    config = getGlobaltConfig()
+    sign_flag = config['sign']
+
     for problem in contest['problems']:
         with open(os.path.join(folder_path, problem + '.cpp'), 'w') as problem_code:
-            problem_code.write(makeSign(folder_path, problem))
+            if sign_flag:
+                problem_code.write(makeSign(folder_path, problem))
             problem_code.write(template)
 
 def addToDB(folder_path):

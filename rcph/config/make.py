@@ -1,15 +1,13 @@
 from rcph.utils import json, os
 from rcph.config.constant import *
+from rcph.utils.get import getGlobaltConfig
 
-def run(folder_path, contest_path, contest):
-    here = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(here, *['..'] * 2, COMPONENTS, CONFIG_FOLDER, GLOBAL_CONFIG)
-    with open(config_path, 'r') as json_file:
-        config = json.load(json_file)
+def run(folder_path, contest_path, contest, parent):
+    config = getGlobaltConfig()
 
     data = {
         'name': contest['name'],
-        'parent': config["default parent"],
+        'parent': config["default parent"] if parent == '' else parent,
         'path': contest_path,
         'link': contest['link'],
         'detail': contest['detail'],

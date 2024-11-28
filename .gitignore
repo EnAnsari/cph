@@ -167,3 +167,7 @@ temp/
 db.txt
 *.exe
 local_*.py
+
+components/db/*
+!components/db/sign.txt
+!components/db/quotes.txt
