@@ -1,7 +1,11 @@
 from setuptools import setup, find_packages
+import os
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
+
+with open(os.path.join('rcph', 'config', 'data.py'), 'w') as file:
+    file.write(f"DATA_ADDRESS = \'{os.path.join(os.getcwd(), 'data')}\'")
 
 setup(
     name="rcph",
@@ -22,7 +26,7 @@ setup(
     ],
     packages= find_packages(),
     install_requires=[],
-    python_requires='>=3.6',  # Specify the minimum Python version
+    python_requires='>=3.7',  # Specify the minimum Python version
     project_urls={  # Additional project links
         "mini judgement": "https://github.com/ctrl-alt-Defeat-icpc/mini-judge",
         "test case adder": "https://github.com/ctrl-alt-Defeat-icpc/mini-tca",

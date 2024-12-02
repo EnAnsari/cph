@@ -1,8 +1,8 @@
-from rcph.utils import json, os
+from rcph.utils.imports import json, os
 from rcph.config.constant import *
-from rcph.utils.get import getGlobaltConfig
+from rcph.utils.launcher import getGlobaltConfig
 
-def run(folder_path, contest_path, contest, parent):
+def makeLocalConfig(folder_path, contest_path, contest, parent):
     config = getGlobaltConfig()
 
     data = {

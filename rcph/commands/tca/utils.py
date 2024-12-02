@@ -1,6 +1,6 @@
-from rcph.utils import os, zipfile
+from rcph.utils.imports import os, zipfile
 from rcph.config.constant import *
-from rcph.utils.get import getInfo, setInfo
+from rcph.utils.launcher import getInfo, setInfo
 from rcph.utils.color import colored_text
 
 

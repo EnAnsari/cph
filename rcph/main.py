@@ -1,6 +1,6 @@
-from rcph.utils import print_error, inspect
+from rcph.utils.imports import print_error, inspect
+from rcph.utils.launcher import isDevMode
 from rcph.core.parser import create_parser
-from rcph.config.constant import DEVMODE
 
 def run():
     parser = create_parser()
@@ -17,13 +17,15 @@ def run():
 
 
 def main():
-    if not DEVMODE:
-        try:
-            run()
-        except Exception as e:
-            print_error(str(e))
+    if not isDevMode():
+        print('we use normal mode')
+        # try:
+        #     run()
+        # except Exception as e:
+        #     print_error(str(e))
     else:
-        run()
+        print('we use dev mode')
+        # run()
 
 
 if __name__ == "__main__":

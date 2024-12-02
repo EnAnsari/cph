@@ -1,5 +1,5 @@
-from rcph.utils import argparse
-from rcph.utils.hello import run as hello_runner
+from rcph.utils.imports import argparse
+from rcph.utils.tools.hello import run as hello_runner
 from rcph.commands.init.handler import run as init_runner
 from rcph.commands.tca.handler import run as tca_runner
 from rcph.commands.judge.handler import run as judge_runner
@@ -18,6 +18,7 @@ def create_parser():
     # Add the 'init' subcommand
     init_parser = subparsers.add_parser("init", aliases=["i"], help="Initialize configuration")
     init_parser.add_argument('folder_name', help='Name of the folder to initialize.')
+    init_parser.add_argument('test', nargs='?', help='is contest \'test\' or real') # if contest test it isn't save in data
     init_parser.add_argument('parent', nargs='?', help='parent portal address')
     init_parser.set_defaults(func=init_runner)
 

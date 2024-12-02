@@ -1,4 +1,4 @@
-from rcph.utils import random
+from rcph.utils.imports import random
 from rcph.config.constant import *
 
 def make_a_quote(quotes):

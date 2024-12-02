@@ -1,4 +1,4 @@
-from rcph.utils import os, sys, subprocess
+from rcph.utils.imports import os, sys, subprocess
 from rcph.config.constant import *
 from rcph.utils.color import colored_text
 

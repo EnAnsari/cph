@@ -1,14 +1,11 @@
-from rcph.utils import os, datetime, json
+from rcph.utils.imports import os, datetime, json
 from .quote import make_a_quote
 from rcph.config.constant import *
+from ..launcher import getSign, getQuote
 
 def makeSign(folder_path, problem_letter):
-    here = os.path.dirname(os.path.abspath(__file__))
-    db = os.path.join(here, *['..'] * 2, COMPONENTS, DB_FOLDER)
-
-    with open(os.path.join(db, SIGN_FILE), 'r') as sign_file, open(os.path.join(db, QUOTES_FILE), 'r') as quote_file:
-        quotes = quote_file.readlines()
-        local_sign = sign_file.readlines()
+    quotes = getQuote()
+    local_sign = getSign
 
     with open(os.path.join(folder_path, RCPH_FOLDER, CONTEST_INFO_JSON), 'r') as file:
         contest = json.load(file)

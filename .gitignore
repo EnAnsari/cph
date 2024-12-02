@@ -168,6 +168,7 @@ db.txt
 *.exe
 local_*.py
 
-components/db/*
-!components/db/sign.txt
-!components/db/quotes.txt
+data/db/*
+!data/db/sign.txt
+!data/db/quotes.txt
+# rcph/config/data.py

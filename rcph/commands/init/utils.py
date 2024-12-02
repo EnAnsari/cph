@@ -1,8 +1,8 @@
-from rcph.utils import os, shutil, json
+from rcph.utils.imports import os, shutil, json
 from rcph.config.constant import *
-from rcph.config.make import run as makeCofingJson
-from rcph.utils.sign import makeSign
-from rcph.utils.get import getTemplate, getGlobaltConfig
+from rcph.config.make import makeLocalConfig
+from rcph.utils.tools.sign import makeSign
+from rcph.utils.launcher import getTemplate, getGlobaltConfig
 
 def makeFolder(folder_path):
     if not os.path.exists(folder_path):
@@ -49,21 +49,18 @@ def testCaseMaker(folder_path, contest):
 def makeRcphFolder(folder_path, contest, parent):
     rcph_folder = os.path.join(folder_path, RCPH_FOLDER)
     os.mkdir(rcph_folder)
-    makeCofingJson(rcph_folder, folder_path, contest, parent)
+    makeLocalConfig(rcph_folder, folder_path, contest, parent)
     testCaseMaker(rcph_folder, contest)
 
 
 def makeTemplateCode(folder_path):
     template = getTemplate()
-    shutil.copy(template, os.path.join(folder_path, TEMPLATE_CPP))
+    with open(os.path.join(folder_path, TEMPLATE_CPP), 'w') as template_file:
+        template_file.write(template)
 
 
 def makeProblemCodes(folder_path, contest):
     template = getTemplate()
-
-    with open(template, 'r') as template_file:
-        template = template_file.read()
-
     config = getGlobaltConfig()
     sign_flag = config['sign']
 
@@ -72,17 +69,3 @@ def makeProblemCodes(folder_path, contest):
             if sign_flag:
                 problem_code.write(makeSign(folder_path, problem))
             problem_code.write(template)
-
-def addToDB(folder_path):
-    here = os.path.dirname(__file__)
-    contestDB_path = os.path.join(here, *['..'] * 3, COMPONENTS, DB_FOLDER, CONTEST_DB_NAME)
-
-    if os.path.exists(contestDB_path):
-        with open(contestDB_path, 'r') as contestDB_file:
-            contestDB = json.load(contestDB_file)
-    else:
-        contestDB = []
-
-    contestDB.append(folder_path)
-    with open(contestDB_path, 'w') as contestDB_file:
-        json.dump(contestDB, contestDB_file, indent=4)
