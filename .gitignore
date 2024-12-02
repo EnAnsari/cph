@@ -171,4 +171,4 @@ local_*.py
 data/db/*
 !data/db/sign.txt
 !data/db/quotes.txt
-# rcph/config/data.py
+rcph/config/data.py
