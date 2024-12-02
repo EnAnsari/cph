@@ -1,14 +1,17 @@
 from rcph.utils.tools.color import colored_text
 from .utils import *
 from rcph.config.constant import *
-from rcph.utils.launcher import isDevMode
+from rcph.utils.launcher import isDevMode, updateDBcontest
 
 def createContestInFolder(folder_path, parent, test):
     contest_info = getContestInfo()
     makeRcphFolder(folder_path, contest_info, parent)
     makeProblemCodes(folder_path, contest_info)
-    if not isDevMode and not test:
+
+    if not isDevMode() and not test:
         updateDBcontest(folder_path)
+        print('I am here!!!')
+
     print(f'\nyour contest created {colored_text("successfully", "green", "bold")} by {len(contest_info["problems"])} problem!')
 
 

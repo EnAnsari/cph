@@ -18,14 +18,12 @@ def run():
 
 def main():
     if not isDevMode():
-        print('we use normal mode')
-        # try:
-        #     run()
-        # except Exception as e:
-        #     print_error(str(e))
+        try:
+            run()
+        except Exception as e:
+            print_error(str(e))
     else:
-        print('we use dev mode')
-        # run()
+        run()
 
 
 if __name__ == "__main__":

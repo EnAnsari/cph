@@ -164,6 +164,7 @@ cython_debug/
 .parser/
 old/
 temp/
+tmp/
 db.txt
 *.exe
 local_*.py

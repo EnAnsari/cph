@@ -5,7 +5,7 @@ from ..launcher import getSign, getQuote
 
 def makeSign(folder_path, problem_letter):
     quotes = getQuote()
-    local_sign = getSign
+    local_sign = getSign()
 
     with open(os.path.join(folder_path, RCPH_FOLDER, CONTEST_INFO_JSON), 'r') as file:
         contest = json.load(file)

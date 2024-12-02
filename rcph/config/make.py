@@ -20,7 +20,6 @@ def makeLocalConfig(folder_path, contest_path, contest, parent):
             'letter': problem_letter,
             'name': '',
             'status': 'null',
-            'test case': 0
         }
         
         data['problems'].append(problem)

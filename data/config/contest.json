@@ -1,5 +1,5 @@
 {
     "default parent": "default",
-    "sign": false,
-    "debug": true
+    "sign": true,
+    "debug": false
 }

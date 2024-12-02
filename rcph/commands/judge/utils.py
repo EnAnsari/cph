@@ -1,6 +1,6 @@
 from rcph.utils.imports import os, sys, subprocess
 from rcph.config.constant import *
-from rcph.utils.color import colored_text
+from rcph.utils.tools.color import colored_text
 
 
 def compareText(text1, text2):
@@ -22,7 +22,7 @@ def getFolder(problem):
 
 
 def getExecutiveFile():
-    exe = os.path.join(os.getcwd(), "a.exe" if sys.platform == 'win32' else "a.out")
+    exe = os.path.join(os.getcwd(), "a.exe" if sys.platform == 'win32' else "a.out") # this elements is default by os
     if not os.path.exists(exe):
         raise Exception("Executable not found! Compile your C++ file.")
     return exe
@@ -56,7 +56,7 @@ def judge(problem):
                 print(colored_text(f"Test {t} FAILED!\n", 'red', 'bold'))
         t += 1
 
-    if t - 1 == 0:
+    if t - 1 == 0: # test case doesn't exist!
         print(colored_text(f'there is not any test case for problem {problem}', 'yellow'))
     else:
         print(colored_text(f"{p} test(s) passed, {t-p-1} test(s) failed!", 'blue'))
@@ -67,14 +67,14 @@ def judge(problem):
 
 
 def executeInput():
-    input_path = os.path.join(os.getcwd(), 'input.txt')
+    input_path = os.path.join(os.getcwd(), INPUT_FILE)
     if not os.path.exists(input_path):
-        raise Exception('input.txt file does not exist!')
+        raise Exception(f'{INPUT_FILE} file does not exist!')
     with open(input_path, 'r') as fin:
         input_content = fin.read().strip()
     
     exe = getExecutiveFile()
     output = execute(exe, input_content)
     
-    with open(os.path.join(os.getcwd(), 'output.txt'), 'w') as fout:
+    with open(os.path.join(os.getcwd(), OUTPUT_FILE), 'w') as fout: # print output in output file
         fout.write(output.strip())

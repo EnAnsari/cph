@@ -1,5 +1,6 @@
-from rcph.utils.imports import os, json, pkg_resources
+from rcph.utils.imports import os, json
 from rcph.config.constant import *
+from rcph.config.data import DATA_ADDRESS
 
 def getInfo():
     with open(os.path.join(os.getcwd(), RCPH_FOLDER, CONTEST_INFO_JSON), 'r') as file:
@@ -15,8 +16,8 @@ def getLastJudge():
     return problem
 
 def getGlobaltConfig():
-    with pkg_resources.open_text(CONFIG_FOLDER, GLOBAL_CONFIG) as json_file:
-        config = json.load(json_file)
+    with open(os.path.join(DATA_ADDRESS, CONFIG_FOLDER, GLOBAL_CONFIG), 'r') as config_file:
+        config = json.load(config_file)
     
     return config
 
@@ -25,19 +26,19 @@ def isDevMode(): # am I using this app developer mode or normal mode?
     return config['debug']
 
 def getTemplate():
-    with pkg_resources.open_text(TEMPLATE_FOLDER, DATA_TEMPLATE_CPP) as template_file:
+    with open(os.path.join(DATA_ADDRESS, TEMPLATE_FOLDER, DATA_TEMPLATE_CPP), 'r') as template_file:
         template = template_file.read()
     
     return template
 
 def getQuote():
-    with pkg_resources.open_text(DB_FOLDER, QUOTES_FILE) as quotes_file:
+    with open(os.path.join(DATA_ADDRESS, DB_FOLDER, QUOTES_FILE), 'r') as quotes_file:
         quotes = quotes_file.readlines()
     
     return quotes
 
 def getSign():
-    with pkg_resources.open_text(DB_FOLDER, SIGN_FILE) as sign_file:
+    with open(os.path.join(DATA_ADDRESS, DB_FOLDER, SIGN_FILE), 'r') as sign_file:
         sign = sign_file.readlines()
     
     return sign

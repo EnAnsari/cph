@@ -1,11 +1,13 @@
 from setuptools import setup, find_packages
 import os
 
+DATA_FOLDER = 'data'
+
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 with open(os.path.join('rcph', 'config', 'data.py'), 'w') as file:
-    file.write(f"DATA_ADDRESS = \'{os.path.join(os.getcwd(), 'data')}\'")
+    file.write(f"DATA_ADDRESS = \'{os.path.join(os.getcwd(), DATA_FOLDER)}\'")
 
 setup(
     name="rcph",

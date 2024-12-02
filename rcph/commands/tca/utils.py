@@ -1,16 +1,27 @@
 from rcph.utils.imports import os, zipfile
 from rcph.config.constant import *
 from rcph.utils.launcher import getInfo, setInfo
-from rcph.utils.color import colored_text
+from rcph.utils.tools.color import colored_text
 
 
-def updateInfoTestCase(problem):
+def clearTestCasesOfProblem(folder):
+    num = 0
+    for item in os.listdir(folder):
+        item_path = os.path.join(folder, item)
+        if os.path.isfile(item_path):
+            os.remove(item_path)
+            num += 1
+    print(colored_text(f'{num} file was deleted!', 'red'))
+
+
+def clearTestCases():
     info = getInfo()
-    for p in info['problems']:
-        if problem == p['letter']:
-            p['test case'] = 1
-            break
-    setInfo(info)
+    tc_folder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER)
+    for problem in info['problems']:
+        problem_tc = os.path.join(tc_folder, problem['letter'])
+        if os.path.exists(problem_tc):
+            clearTestCasesOfProblem(problem_tc)
+
 
 def testCounter(problemFolder):
     result = 1
@@ -32,8 +43,14 @@ def textInput():
 def addTestcase(folder, num):
     print(colored_text('Enter input:', 'cyan'))
     in_f = textInput()
+    if in_f == '':
+        return
+
     print(colored_text('Enter output:', 'cyan'))
     out_f = textInput()
+    if out_f == '':
+        return
+
     with open(os.path.join(folder, num + '.in'), 'w') as ifile, open(os.path.join(folder, num + '.ans'), 'w') as ofile:
         ifile.write(in_f)
         ofile.write(out_f)
@@ -42,16 +59,17 @@ def addTestcase(folder, num):
 def createTest(problem):
     problemFolder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER, problem)
     if not os.path.exists(problemFolder):
-        raise f'problem {problem} not found!'
+        raise Exception(f'problem {problem} not found!')
     testNum = testCounter(problemFolder)
     num = input(colored_text(f'Availabe test(s): {testNum}, how many to add? ', 'yellow'))
+    
+    if num in ['delete', 'clear']:
+        clearTestCasesOfProblem(problemFolder)
+
     num = int(num) if num.isdigit() else 0
     for i in range(num):
         print(colored_text(f'Test case number {i + 1 + testNum}...', 'blue'))
         addTestcase(problemFolder, str(i + 1 + testNum))
-
-    if num != 0:
-        updateInfoTestCase(problem)
 
 
 def totalAdding():
@@ -76,4 +94,3 @@ def domjudge():
             with zipfile.ZipFile(file_address, 'r') as zip_ref:
                 zip_ref.extractall(target_folder)
             os.remove(file_address)
-            updateInfoTestCase(name)
