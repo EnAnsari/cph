@@ -3,6 +3,9 @@ from rcph.utils.tools.hello import run as hello_runner
 from rcph.commands.init.handler import run as init_runner
 from rcph.commands.tca.handler import run as tca_runner
 from rcph.commands.judge.handler import run as judge_runner
+from rcph.commands.addq.handler import run as addq_runner
+from rcph.commands.delq.handler import run as delq_renner
+from rcph.commands.make.handler import run as make_runner
 
 def create_parser():
     parser = argparse.ArgumentParser(
@@ -31,5 +34,20 @@ def create_parser():
     judge_parser = subparsers.add_parser("judge", aliases=["j"], help="test case judger")
     judge_parser.add_argument('problem', nargs='?', help='problem name')
     judge_parser.set_defaults(func=judge_runner)
+
+    # Add the 'addq' subcommand to adding questions
+    addq_parser = subparsers.add_parser("addq", help="add question")
+    addq_parser.add_argument('problem', help='problem name')
+    addq_parser.set_defaults(func=addq_runner)
+
+    # Add the 'delq' subcommand to deleting questions
+    delq_parser = subparsers.add_parser("delq", help="delete question")
+    delq_parser.add_argument('problem', help='problem name')
+    delq_parser.set_defaults(func=delq_renner)
+
+    # Add the 'make' subcommand
+    make_parser = subparsers.add_parser("make", help="delete question")
+    make_parser.add_argument('file', help='file name')
+    make_parser.set_defaults(func=make_runner)
 
     return parser

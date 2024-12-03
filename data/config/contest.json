@@ -1,5 +1,12 @@
 {
     "default parent": "default",
     "sign": true,
-    "debug": false
+    "sgin detail": {
+        "side": "bottom",
+        "contest info": false,
+        "personal sign": true,
+        "quote": false,
+        "about": true
+    },
+    "debug": true
 }

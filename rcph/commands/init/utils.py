@@ -1,48 +1,50 @@
-from rcph.utils.imports import os, shutil, json
+from rcph.utils.imports import os
 from rcph.config.constant import *
 from rcph.config.make import makeLocalConfig
 from rcph.utils.tools.sign import makeSign
 from rcph.utils.launcher import getTemplate, getGlobaltConfig
 
-def makeFolder(folder_path):
-    if not os.path.exists(folder_path):
-        os.mkdir(folder_path)
-    else:
+def checkFolderExistence(folder_path):
+    if os.path.exists(folder_path):
         raise FileExistsError(f"Folder already exists: {folder_path}")
+    
+
+def makeFolder(folder_path):
+    checkFolderExistence(folder_path)
+    os.mkdir(folder_path)
 
 
 def getContestInfo():
     contest = {
-        'name': '',
-        'link': '',
-        'detail': '',
-        'repo': '',
-        'problems' : [],
+        DICT.NAME: '',
+        DICT.LINK: '',
+        DICT.DETAIL: '',
+        DICT.REPO: '',
+        DICT.PROBLEMS : [],
     }
 
-    contest['name'] = input("Enter Contest Name: ")
-    if contest['name'] != '':
-        contest['link'] = input("Enter Contest link: ")
-        contest['detail'] = input("Enter Contest detail: ")
-        contest['repo'] = input("Enter Contest repository: ")
+    contest[DICT.NAME] = input("Enter Contest Name: ")
+    if contest[DICT.NAME] != '':
+        contest[DICT.LINK] = input("Enter Contest link: ")
+        contest[DICT.LINK] = input("Enter Contest detail: ")
+        contest[DICT.REPO] = input("Enter Contest repository: ")
 
     problems = input('Enter name/numbers of problems: ')
 
     
     if problems.isdigit():
         for i in range(int(problems)):
-            contest['problems'].append(chr(ord('a') + i))
+            contest[DICT.PROBLEMS].append(chr(ord('a') + i))
     else:
         for name in problems.split():
-            contest['problems'].append(name)
+            contest[DICT.PROBLEMS].append(name)
 
     return contest
-
 
 def testCaseMaker(folder_path, contest):
     tc = os.path.join(folder_path, TESTCASE_FOLDER)
     os.mkdir(tc)
-    for problem in contest['problems']:
+    for problem in contest[DICT.PROBLEMS]:
         os.mkdir(os.path.join(tc, problem))
 
 
@@ -59,13 +61,28 @@ def makeTemplateCode(folder_path):
         template_file.write(template)
 
 
-def makeProblemCodes(folder_path, contest):
+def makeProblemScript(folder_path, problem):
+    """
+    creating problem script
+    Args:
+        contest folder path
+        problem letter
+    """
     template = getTemplate()
     config = getGlobaltConfig()
-    sign_flag = config['sign']
+    sign_flag = config[DICT.SIGN]
 
-    for problem in contest['problems']:
-        with open(os.path.join(folder_path, problem + '.cpp'), 'w') as problem_code:
-            if sign_flag:
-                problem_code.write(makeSign(folder_path, problem))
-            problem_code.write(template)
+    with open(os.path.join(folder_path, problem + '.cpp'), 'w') as problem_code:
+        if sign_flag:
+            if config[DICT.SIGN_DETAIL][DICT.SIDE] == DICT.TOP:
+                script =  makeSign(folder_path, problem) + '\n' + template
+            else: # bottom
+                script = template + '\n' + makeSign(folder_path, problem)
+        else:
+            script = template
+
+        problem_code.write(script)
+
+def makeProblemCodes(folder_path, contest):
+    for problem in contest[DICT.PROBLEMS]:
+        makeProblemScript(folder_path, problem)

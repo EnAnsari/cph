@@ -1,6 +1,6 @@
 from rcph.utils.imports import os, zipfile
 from rcph.config.constant import *
-from rcph.utils.launcher import getInfo, setInfo
+from rcph.utils.launcher import getInfo
 from rcph.utils.tools.color import colored_text
 
 
@@ -17,8 +17,8 @@ def clearTestCasesOfProblem(folder):
 def clearTestCases():
     info = getInfo()
     tc_folder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER)
-    for problem in info['problems']:
-        problem_tc = os.path.join(tc_folder, problem['letter'])
+    for problem in info[DICT.PROBLEMS]:
+        problem_tc = os.path.join(tc_folder, problem[DICT.LETTER])
         if os.path.exists(problem_tc):
             clearTestCasesOfProblem(problem_tc)
 
@@ -63,7 +63,7 @@ def createTest(problem):
     testNum = testCounter(problemFolder)
     num = input(colored_text(f'Availabe test(s): {testNum}, how many to add? ', 'yellow'))
     
-    if num in ['delete', 'clear']:
+    if num in [COMMANDS.DELETE, COMMANDS.CLEAR]:
         clearTestCasesOfProblem(problemFolder)
 
     num = int(num) if num.isdigit() else 0

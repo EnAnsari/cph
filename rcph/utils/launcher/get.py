@@ -23,7 +23,7 @@ def getGlobaltConfig():
 
 def isDevMode(): # am I using this app developer mode or normal mode?
     config = getGlobaltConfig()
-    return config['debug']
+    return config[DICT.DEBUG]
 
 def getTemplate():
     with open(os.path.join(DATA_ADDRESS, TEMPLATE_FOLDER, DATA_TEMPLATE_CPP), 'r') as template_file:

@@ -10,7 +10,6 @@ def createContestInFolder(folder_path, parent, test):
 
     if not isDevMode() and not test:
         updateDBcontest(folder_path)
-        print('I am here!!!')
 
     print(f'\nyour contest created {colored_text("successfully", "green", "bold")} by {len(contest_info["problems"])} problem!')
 
@@ -26,7 +25,7 @@ def createContestByFolder(folder_name, parent, test):
 
 def run(args):
     folder_name = args.folder_name
-    test_mode = True if args.test and args.test == 'test' else False
+    test_mode = True if args.test and args.test == COMMANDS.TEST else False
     if args.parent:
         parent = os.path.join(os.getcwd(), args.parent, RCPH_FOLDER, PARENT_PORTAL)
         if os.path.exists(parent):
@@ -38,6 +37,7 @@ def run(args):
         parent = ''
 
     if(folder_name == '.'):
+        checkFolderExistence(os.getcwd())
         createContestInFolder(os.getcwd(), parent, test_mode)
     else:
         createContestByFolder(folder_name, parent, test_mode)

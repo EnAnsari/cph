@@ -6,23 +6,23 @@ def makeLocalConfig(folder_path, contest_path, contest, parent):
     config = getGlobaltConfig()
 
     data = {
-        'name': contest['name'],
-        'parent': config["default parent"] if parent == '' else parent,
-        'path': contest_path,
-        'link': contest['link'],
-        'detail': contest['detail'],
-        'repo': contest['repo'],
-        'problems': [],
+        DICT.NAME: contest[DICT.NAME],
+        DICT.PARENT: config[DICT.DEFAULT_PARENT] if parent == '' else parent,
+        DICT.PATH: contest_path,
+        DICT.LINK: contest[DICT.LINK],
+        DICT.DETAIL: contest[DICT.DETAIL],
+        DICT.REPO: contest[DICT.REPO],
+        DICT.PROBLEMS: [],
     }
 
-    for problem_letter in contest['problems']:
+    for problem_letter in contest[DICT.PROBLEMS]:
         problem = {
-            'letter': problem_letter,
-            'name': '',
-            'status': 'null',
+            DICT.LETTER: problem_letter,
+            DICT.NAME: '',
+            DICT.STATUS: DICT.NULL,
         }
         
-        data['problems'].append(problem)
+        data[DICT.PROBLEMS].append(problem)
 
     with open(os.path.join(folder_path, CONTEST_INFO_JSON), 'w') as json_file:
         json.dump(data, json_file, indent=4)
