@@ -6,6 +6,9 @@ from rcph.commands.judge.handler import run as judge_runner
 from rcph.commands.addq.handler import run as addq_runner
 from rcph.commands.delq.handler import run as delq_renner
 from rcph.commands.make.handler import run as make_runner
+from rcph.commands.status.handler import run as status_runner
+from rcph.commands.edit.handler import run as edit_runner
+
 
 def create_parser():
     parser = argparse.ArgumentParser(
@@ -49,5 +52,14 @@ def create_parser():
     make_parser = subparsers.add_parser("make", help="delete question")
     make_parser.add_argument('file', help='file name')
     make_parser.set_defaults(func=make_runner)
+
+    # Add the 'status' subcommand for set problem status
+    status_parser = subparsers.add_parser("status", help="set a status for problem")
+    status_parser.add_argument('problem', help='problem name')
+    status_parser.set_defaults(func=status_runner)
+
+    # Add the 'edit' subcommand for edit contest detail
+    edit_parser = subparsers.add_parser("edit", help="edit contest detail")
+    edit_parser.set_defaults(func=edit_runner)
 
     return parser
