@@ -8,5 +8,7 @@
         "quote": false,
         "about": true
     },
-    "debug": true
+    "debug": true,
+    "ls by enter": true,
+    "hidden items": false
 }

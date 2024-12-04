@@ -55,3 +55,5 @@ class COMMANDS:
     TEST = 'test'
     INPUT = 'input'
     DOMJUDGE = 'domjudge'
+    LS_BY_ENTER = 'ls by enter'
+    HIDDEN_ITEMS = 'hidden items'

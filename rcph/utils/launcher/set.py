@@ -31,3 +31,11 @@ def setAssetConnection(address):
     }
     with open(os.path.join(DATA_ADDRESS, DB_FOLDER, ASSET_JSON), 'w') as asset_bank:
         json.dump(asset, asset_bank, indent=4)
+
+def getAssetDirectory():
+    asset_file_path = os.path.join(DATA_ADDRESS, DB_FOLDER, ASSET_JSON)
+    if not os.path.exists(asset_file_path):
+        return ''
+    with open(asset_file_path, 'r') as asset_file:
+        asset = json.load(asset_file)
+    return asset['asset']

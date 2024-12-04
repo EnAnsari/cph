@@ -6,4 +6,4 @@ def run(args):
     if connect:
         makeConnection()
     else:
-        pass
+        getAssetFile()
