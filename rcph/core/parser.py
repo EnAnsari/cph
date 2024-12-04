@@ -12,6 +12,13 @@ from rcph.commands.info.handler import run as info_runner
 from rcph.commands.readme.handler import run as readme_runnder
 from rcph.commands.cp.handler import run as cp_runner
 
+from rcph.commands.asset.handler import run as asset_runner
+from rcph.commands.search.handler import run as search_runner
+from rcph.commands.globall.handler import run as global_runner
+from rcph.commands.tcbank.handler import run as tcbank_runner
+from rcph.commands.save.handler import run as save_runner
+
+
 def create_parser():
     parser = argparse.ArgumentParser(
         description="Welcome to rcph! A CLI tool for competitive programming.",
@@ -78,6 +85,10 @@ def create_parser():
     cp_parser.add_argument('src', help='source file address')
     cp_parser.add_argument('des', nargs='?', help='destination file address')
     cp_parser.set_defaults(func=cp_runner)
+
+    asset_parser = subparsers.add_parser('asset', help='asset file bringer')
+    asset_parser.add_argument('connect', nargs='?', help='to connection an asset folder')
+    asset_parser.set_defaults(func=asset_runner)
 
 
     return parser

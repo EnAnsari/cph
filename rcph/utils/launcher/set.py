@@ -24,3 +24,10 @@ def updateDBcontest(contest_address):
     contestDB.append(contest_address)
     with open(contestDB_path, 'w') as contestDB_file:
         json.dump(contestDB, contestDB_file, indent=4)
+
+def setAssetConnection(address):
+    asset = {
+        'asset': address
+    }
+    with open(os.path.join(DATA_ADDRESS, DB_FOLDER, ASSET_JSON), 'w') as asset_bank:
+        json.dump(asset, asset_bank, indent=4)

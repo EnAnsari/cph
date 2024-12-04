@@ -6,6 +6,7 @@ DATA_FOLDER = 'data'
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+# create data address file
 with open(os.path.join('rcph', 'config', 'data.py'), 'w') as file:
     file.write(f"DATA_ADDRESS = \'{os.path.join(os.getcwd(), DATA_FOLDER)}\'")
 
@@ -27,7 +28,10 @@ setup(
         "Intended Audience :: Developers",
     ],
     packages= find_packages(),
-    install_requires=[],
+    install_requires=[
+        'prompt_toolkit',
+        # Add other dependencies if needed
+    ],
     python_requires='>=3.7',  # Specify the minimum Python version
     project_urls={  # Additional project links
         "mini judgement": "https://github.com/ctrl-alt-Defeat-icpc/mini-judge",
