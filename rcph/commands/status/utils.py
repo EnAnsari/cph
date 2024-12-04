@@ -15,7 +15,7 @@ def checkExistenceProblem(problem):
 
 def setStatus(problem):
     info = getInfo()
-    status = input(colored_text(f'Enter status of problem {problem} (Accept|WA|null): ', 'yellow')).lower()
+    status = input(colored_text(f'Enter status of problem {problem} (Accept|WA|raw|null): ', 'yellow')).lower()
     
     if status == '':
         return # canceled
@@ -23,6 +23,8 @@ def setStatus(problem):
         status = 'Wrong Answer'
     elif status in ['accept', 'correct', 'acc']:
         status = 'Accept'
+    elif status == 'raw':
+        status = 'raw'
     elif status in ['null', 'none']:
         status = 'null'
     else:

@@ -8,7 +8,8 @@ from rcph.commands.delq.handler import run as delq_renner
 from rcph.commands.make.handler import run as make_runner
 from rcph.commands.status.handler import run as status_runner
 from rcph.commands.edit.handler import run as edit_runner
-
+from rcph.commands.info.handler import run as info_runner
+from rcph.commands.readme.handler import run as readme_runnder
 
 def create_parser():
     parser = argparse.ArgumentParser(
@@ -61,5 +62,14 @@ def create_parser():
     # Add the 'edit' subcommand for edit contest detail
     edit_parser = subparsers.add_parser("edit", help="edit contest detail")
     edit_parser.set_defaults(func=edit_runner)
+
+    # Add the 'info' subcommand for showing contest information
+    info_parser = subparsers.add_parser("info", help="showing contest information")
+    info_parser.set_defaults(func=info_runner)
+
+    # Add the 'readme' subcommand for creating readme file
+    readme_parser = subparsers.add_parser("readme", aliases=["md"], help="create readme file")
+    readme_parser.add_argument('address', help='address of readme file')
+    readme_parser.set_defaults(func=readme_runnder)
 
     return parser

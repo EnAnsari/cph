@@ -42,3 +42,11 @@ def getSign():
         sign = sign_file.readlines()
     
     return sign
+
+
+def testCounter(problem):
+    result = 1
+    problemFolder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER, problem)
+    while os.path.exists(os.path.join(problemFolder, str(result) + '.in')) and os.path.exists(os.path.join(problemFolder, str(result) + '.ans')):
+        result += 1
+    return result - 1

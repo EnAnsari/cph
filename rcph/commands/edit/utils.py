@@ -3,7 +3,10 @@ from rcph.utils.launcher import getInfo, setInfo
 from rcph.utils.tools.color import colored_text
 
 def inputData(sentence, value):
-    data = input(colored_text(f'{sentence}: {value if value != "" else "empty"} (new?): ', 'yellow'))
+    input_sentence = colored_text(f'{sentence}: ', 'yellow')
+    input_sentence += colored_text(value, 'cyan', 'bold') if value else colored_text('-empty-', 'yellow')
+    input_sentence += colored_text(f' (new?): ', 'yellow')
+    data = input(input_sentence)
     if data == '':
         return value
     elif data == '--':
