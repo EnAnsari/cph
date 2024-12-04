@@ -1,4 +1,5 @@
-from rcph.utils.imports import os
+from rcph.utils.imports import os, pathlib
+from pathlib import Path
 from rcph.config.constant import *
 from rcph.utils.launcher import getInfo, getSign
 from rcph.utils.tools.color import colored_text
@@ -13,9 +14,19 @@ def fileWriter(address, content):
         readme_file.write(content)
     print(colored_text('readme file successfully created!', 'green'))
 
-def createReadme():
+def getRelativePath(address1, address2):
+    first = Path(address1)
+    second = Path(address2)
+    relative_path = first.relative_to(second.resolve())
+    return relative_path
+
+def createReadme(address):
     content = ''
     info = getInfo()
+    link = getRelativePath(os.getcwd(), os.path.join(os.getcwd(), address))
+    print(os.path.join(os.getcwd(), address))
+    print(link)
+
 
     # create first part (name / description)
     if info[DICT.NAME]:
@@ -32,7 +43,7 @@ def createReadme():
         content += "| letter | name | status |\n"
         content += '|:---:|:---:|:---:|\n'
         for problem in info[DICT.PROBLEMS]:
-            content += f'|{problem[DICT.LETTER].upper()}|'
+            content += f'|[{problem[DICT.LETTER].upper()}]({os.path.join(".", link, problem[DICT.LETTER] + ".cpp")})|'
             content += problem[DICT.NAME] if problem[DICT.NAME] else '-empty-'
             content += f'|{problem[DICT.STATUS]}|\n'
         content += '</div>\n\n'

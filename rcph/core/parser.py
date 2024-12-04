@@ -10,6 +10,7 @@ from rcph.commands.status.handler import run as status_runner
 from rcph.commands.edit.handler import run as edit_runner
 from rcph.commands.info.handler import run as info_runner
 from rcph.commands.readme.handler import run as readme_runnder
+from rcph.commands.cp.handler import run as cp_runner
 
 def create_parser():
     parser = argparse.ArgumentParser(
@@ -71,5 +72,12 @@ def create_parser():
     readme_parser = subparsers.add_parser("readme", aliases=["md"], help="create readme file")
     readme_parser.add_argument('address', help='address of readme file')
     readme_parser.set_defaults(func=readme_runnder)
+
+    # Add the 'cp' subcommand for copying files from data/template
+    cp_parser =  subparsers.add_parser("cp", help="copy from template folder")
+    cp_parser.add_argument('src', help='source file address')
+    cp_parser.add_argument('des', nargs='?', help='destination file address')
+    cp_parser.set_defaults(func=cp_runner)
+
 
     return parser
