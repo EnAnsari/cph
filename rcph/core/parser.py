@@ -86,9 +86,14 @@ def create_parser():
     cp_parser.add_argument('des', nargs='?', help='destination file address')
     cp_parser.set_defaults(func=cp_runner)
 
-    asset_parser = subparsers.add_parser('asset', help='asset file bringer')
+    # Add the 'asset' subcommand
+    asset_parser = subparsers.add_parser('asset', aliases=['ass'], help='asset file bringer')
     asset_parser.add_argument('connect', nargs='?', help='to connection an asset folder')
     asset_parser.set_defaults(func=asset_runner)
 
+    # Add the 'save' subcommand for saving files in asset
+    save_parser = subparsers.add_parser('save', help='save file in asset')
+    save_parser.add_argument('file', help='file selected for save in asset/saved')
+    save_parser.set_defaults(func=save_runner)
 
     return parser

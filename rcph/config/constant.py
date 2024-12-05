@@ -22,7 +22,9 @@ GLOBAL_CONFIG = 'contest.json' # in config folder
 CONTEST_DB_NAME = 'contests.json' # in db folder
 QUOTES_FILE = 'quotes.txt'
 SIGN_FILE = 'sign.txt'
-ASSET_JSON = 'asset.json'
+CONNECTION_JSON = 'connection.json'
+ASSET_FOLDER = 'asset' # a folder for saving assets
+SAVED = 'saved' # in asset folder for saving my assets
 
 # dictionary keys
 class DICT:

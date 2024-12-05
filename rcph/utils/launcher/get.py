@@ -50,3 +50,17 @@ def testCounter(problem):
     while os.path.exists(os.path.join(problemFolder, str(result) + '.in')) and os.path.exists(os.path.join(problemFolder, str(result) + '.ans')):
         result += 1
     return result - 1
+
+
+def getConnectionFile():
+    connection_file_path = os.path.join(DATA_ADDRESS, DB_FOLDER, CONNECTION_JSON)
+    if not os.path.exists(connection_file_path):
+        raise Exception('There is not any connection! please make someone...')
+    with open(connection_file_path, 'r') as connection_file:
+        connection = json.load(connection_file)
+    return connection
+
+
+def getAssetDirectory():
+    connection = getConnectionFile()
+    return connection['asset']
