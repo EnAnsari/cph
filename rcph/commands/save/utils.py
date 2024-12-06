@@ -1,10 +1,9 @@
-from rcph.utils.imports import os, sys
-from rcph.utils.launcher import getGlobaltConfig, getConnectionFile
+from rcph.utils.imports import os, sys, shutil
+from rcph.utils.launcher import getGlobaltConfig, getConnection
 from rcph.utils.tools.color import colored_text
 from rcph.utils.tools.clear import clear_terminal
 from rcph.config.constant import *
 from rcph.commands.asset.utils import advancedListDIR, prompt, prompt_toolkit, DirectoryCompleter, Style, InMemoryHistory
-from prompt_toolkit.key_binding import KeyBindings
 
 def checkExistence(file):
     file_path = os.path.join(os.getcwd(), file)
@@ -12,11 +11,12 @@ def checkExistence(file):
         raise Exception(f'{file} file does not exist!')
     return file_path
 
+
 def explore():
+    print(colored_text('you can use this commands: save, mkdir, rmdir, ls, clear, and direcotry name to enter', 'yellow'))
     config = getGlobaltConfig()
     hidden_items = config[COMMANDS.HIDDEN_ITEMS]
-    connection = getConnectionFile()
-
+    connection = getConnection()
     
     dir = os.path.join(connection[ASSET_FOLDER], SAVED)
     os.makedirs(dir, exist_ok=True)
@@ -31,29 +31,42 @@ def explore():
         'prompt': 'ansigreen bold',  # Green color for the prompt
         '': 'ansiblack',             # Default color for the input text
     })
-    bindings = KeyBindings()
-
-    exitCondition = False
-
-    @bindings.add('c-s')
-    def _(event):
-        print("\nCtrl+S detected! Exiting the loop...")
-        exitCondition = True
-        event.app.exit()
     
-    while not exitCondition:
+    while True:
         try:
             user_input = prompt(f"{curr_show}> ", completer=completer, style=style, history=history).strip()
             path = os.path.join(curr, *user_input.split('/'))
 
             # handle save command
             if user_input.lower() == 'save':
-                return path
+                return curr
 
             # handle empty input
             elif user_input == '':
                 if config[COMMANDS.LS_BY_ENTER]:
                     advancedListDIR(curr, hidden_items)
+
+            # handle 'mkdir' command for creating directory
+            elif user_input.lower().startswith('mkdir '):
+                dir_name = user_input[6:].strip()
+                try:
+                    os.mkdir(os.path.join(curr, dir_name))
+                    print(colored_text(f'{dir_name} successfully created!', 'green'))
+                except FileExistsError:
+                    print(colored_text(f'Error: directory {dir_name} already exist!', 'red'))
+
+            # handle 'rmdir' command for deleting empty directories
+            elif user_input.lower().startswith('rmdir '):
+                dir_name = user_input[6:].strip()
+                dir_path = os.path.join(curr, dir_name)
+                if os.path.isdir(dir_path):
+                    if not os.listdir(dir_path):
+                        os.rmdir(dir_path)
+                        print(colored_text(f'{dir_name} successfully removed!', 'green'))
+                    else:
+                        print(colored_text(f'{dir_name} is not empty!', 'red'))
+                else:
+                    print(colored_text(f'{dir_name} is not exist!', 'red'))
 
             # handle ls command
             elif user_input.lower() == "ls":
@@ -99,8 +112,17 @@ def explore():
         # Catch unexpected errors
         except Exception as e:
             raise Exception(f'We have some Error: {e}')
-        
-    return path
+
 
 def fileSaving(src, des):
-    pass
+    file_saved_name = input(colored_text('Enter your file name to save: ', 'yellow'))
+    if file_saved_name == '':
+        file_saved_name = os.path.basename(src)
+    
+    des_path = os.path.join(des, file_saved_name)
+    if os.path.exists(des_path):
+        print(colored_text(f'{file_saved_name} exist in this directory, please try another name!', 'red'))
+        return fileSaving(src, des)
+    
+    shutil.copy(src, des_path)
+    print(colored_text('your file successfully saved!', 'green'))

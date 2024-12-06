@@ -1,7 +1,6 @@
 from rcph.utils.imports import os, json
 from rcph.config.constant import *
 from rcph.config.data import DATA_ADDRESS
-from .get import getConnectionFile
 
 def setInfo(info):
     with open(os.path.join(os.getcwd(), RCPH_FOLDER, CONTEST_INFO_JSON), 'w') as file:
@@ -27,9 +26,11 @@ def updateDBcontest(contest_address):
         json.dump(contestDB, contestDB_file, indent=4)
 
 
-def setAssetConnection(address):
-    connection = getConnectionFile()
-    connection['asset'] = address
+def setConnection(connection):
+    with open(os.path.join(DATA_ADDRESS, DB_FOLDER, CONNECTION_JSON), 'w') as connection_file:
+        json.dump(connection, connection_file, indent=4)
 
-    with open(os.path.join(DATA_ADDRESS, DB_FOLDER, CONNECTION_JSON), 'w') as asset_bank:
-        json.dump(connection, asset_bank, indent=4)
+def setParents(parent):
+    parent_path= os.path.join(DATA_ADDRESS, DB_FOLDER, PARENT_FILE)
+    with open(parent_path, 'w') as parent_file:
+        json.dump(parent, parent_file, indent=4)

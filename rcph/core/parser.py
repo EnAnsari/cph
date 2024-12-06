@@ -17,6 +17,7 @@ from rcph.commands.search.handler import run as search_runner
 from rcph.commands.globall.handler import run as global_runner
 from rcph.commands.tcbank.handler import run as tcbank_runner
 from rcph.commands.save.handler import run as save_runner
+from rcph.commands.parent.handler import run as parent_runner
 
 
 def create_parser():
@@ -95,5 +96,10 @@ def create_parser():
     save_parser = subparsers.add_parser('save', help='save file in asset')
     save_parser.add_argument('file', help='file selected for save in asset/saved')
     save_parser.set_defaults(func=save_runner)
+
+    # Add the 'parent' subcommand for parent business
+    parent_parser = subparsers.add_parser('parent', help='parent business')
+    parent_parser.add_argument('plus', nargs='?', help='if you want to add someone')
+    parent_parser.set_defaults(func=parent_runner)
 
     return parser

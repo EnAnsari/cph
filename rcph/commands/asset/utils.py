@@ -1,5 +1,5 @@
 from rcph.utils.imports import os, shutil, prompt_toolkit, sys
-from rcph.utils.launcher import setAssetConnection, getAssetDirectory, getGlobaltConfig
+from rcph.utils.launcher import setConnection, getAssetDirectory, getGlobaltConfig, getConnection
 from rcph.utils.tools.color import colored_text
 from rcph.utils.tools.clear import clear_terminal
 from rcph.config.constant import *
@@ -147,7 +147,9 @@ def advancedListDIR(curr, hidden_items):
 
 
 def makeConnection():
-    setAssetConnection(os.getcwd())
+    connections = getConnection()
+    connections['asset'] = os.getcwd()
+    setConnection(connections)
 
 def getAssetFile():
     dir = getAssetDirectory()

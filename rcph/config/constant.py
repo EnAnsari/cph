@@ -5,6 +5,7 @@ CONTEST_INFO_JSON = 'info.json'
 TESTCASE_FOLDER = 'tc'
 RCPH_FOLDER = '.rcph'
 PARENT_PORTAL = 'parent.txt' # saved on parent directory usually
+PARENT_FILE = 'parents.json'
 TEMPLATE_CPP = 'template.cpp'
 LASTJUDGE = 'lastjudge.txt'
 

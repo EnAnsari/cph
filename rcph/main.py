@@ -20,10 +20,15 @@ def main():
     if not isDevMode():
         try:
             run()
+        except KeyboardInterrupt:
+            print('\nbye bye! see you again!')
         except Exception as e:
             print_error(str(e))
     else:
-        run()
+        try:
+            run()
+        except KeyboardInterrupt:
+            print('\nbye bye! see you again!')
 
 
 if __name__ == "__main__":

@@ -52,15 +52,24 @@ def testCounter(problem):
     return result - 1
 
 
-def getConnectionFile():
+def getConnection():
     connection_file_path = os.path.join(DATA_ADDRESS, DB_FOLDER, CONNECTION_JSON)
     if not os.path.exists(connection_file_path):
-        raise Exception('There is not any connection! please make someone...')
+        # raise Exception('There is not any connection! please make someone...')
+        return {}
     with open(connection_file_path, 'r') as connection_file:
         connection = json.load(connection_file)
     return connection
 
 
 def getAssetDirectory():
-    connection = getConnectionFile()
+    connection = getConnection()
     return connection['asset']
+
+def getParents():
+    parent_path= os.path.join(DATA_ADDRESS, DB_FOLDER, PARENT_FILE)
+    if not os.path.exists(parent_path):
+        raise Exception('There is not any parents file in data/db!')
+    with open(parent_path, 'r') as parent_file:
+        parent = json.load(parent_file)
+    return parent
