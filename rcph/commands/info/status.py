@@ -1,17 +1,10 @@
-from rcph.utils.imports import os
-from rcph.utils.launcher import getInfo, setInfo
+from rcph.utils.launcher import getInfo, setInfo, checkExistenceProblem
 from rcph.utils.tools.color import colored_text
 from rcph.config.constant import *
 
-
-def checkExistenceProblem(problem):
-    info = getInfo()
-    for p in info[DICT.PROBLEMS]:
-        if p[DICT.LETTER] == problem:
-            return True
-    # return False # problem does not exist!
-    raise Exception(f'problem {problem} does not exist!')
-
+def problemCheck(problem):
+    if not checkExistenceProblem(problem):
+        raise Exception(f'problem {problem} does not exist!')
 
 def setStatus(problem):
     info = getInfo()
@@ -19,14 +12,14 @@ def setStatus(problem):
     
     if status == '':
         return # canceled
-    elif status in ['wrong answer', 'wa',  'wrong']:
-        status = 'Wrong Answer'
-    elif status in ['accept', 'correct', 'acc']:
-        status = 'Accept'
-    elif status == 'raw':
-        status = 'raw'
-    elif status in ['null', 'none']:
-        status = 'null'
+    elif status in PROBLEM_STATUS.COMMAND.WRONG_ANSWER:
+        status = PROBLEM_STATUS.STATUS.WRONG_ANSWER
+    elif status in PROBLEM_STATUS.COMMAND.ACCEPT:
+        status = PROBLEM_STATUS.STATUS.ACCEPT
+    elif status in PROBLEM_STATUS.COMMAND.RAW:
+        status = PROBLEM_STATUS.STATUS.RAW
+    elif status in PROBLEM_STATUS.COMMAND.NULL:
+        status = PROBLEM_STATUS.STATUS.NULL
     else:
         raise Exception(f'{status} is invalid for status!')
     

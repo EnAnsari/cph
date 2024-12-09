@@ -15,9 +15,7 @@ def compareText(text1, text2):
 
 
 def getFolder(problem):
-    problem_folder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER, problem)
-    if not os.path.exists(problem_folder):
-        raise Exception(f'problem {problem} does not exist!')
+    problem_folder = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER, problem)
     return problem_folder
 
 
@@ -67,14 +65,14 @@ def judge(problem):
 
 
 def executeInput():
-    input_path = os.path.join(os.getcwd(), INPUT_FILE)
+    input_path = os.path.join(os.getcwd(), CURRENT.INPUT_FILE)
     if not os.path.exists(input_path):
-        raise Exception(f'{INPUT_FILE} file does not exist!')
+        raise Exception(f'{CURRENT.INPUT_FILE} file does not exist!')
     with open(input_path, 'r') as fin:
         input_content = fin.read().strip()
     
     exe = getExecutiveFile()
     output = execute(exe, input_content)
     
-    with open(os.path.join(os.getcwd(), OUTPUT_FILE), 'w') as fout: # print output in output file
+    with open(os.path.join(os.getcwd(), CURRENT.OUTPUT_FILE), 'w') as fout: # print output in output file
         fout.write(output.strip())

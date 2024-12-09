@@ -2,58 +2,61 @@ from rcph.utils.imports import os, json
 from rcph.config.constant import *
 from rcph.config.data import DATA_ADDRESS
 
-def getInfo():
-    with open(os.path.join(os.getcwd(), RCPH_FOLDER, CONTEST_INFO_JSON), 'r') as file:
-        info = json.load(file)
-    return info
+def _getJson(address):
+    with open(address, 'r') as f:
+        result = json.load(f)
+    return result
+
+def _readFile(address):
+    with open(address, 'r') as f:
+        result = f.read()
+    return result
+
+def _readLinesFile(address):
+    with open(address, 'r') as f:
+        result = f.readlines()
+    return result
+
+def currentIsContest(address=None):
+    here = address if address else os.getcwd()
+    local_info = os.path.join(here, CURRENT.RCPH_FOLDER, CURRENT.CONTEST_INFO_JSON)
+    return os.path.exists(local_info)
+
+def getInfo(address=None): # local config
+    return _getJson(os.path.join(address if address else os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.CONTEST_INFO_JSON))
 
 def getLastJudge():
-    last_judge_file = os.path.join(os.getcwd(), RCPH_FOLDER, LASTJUDGE)
+    last_judge_file = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.LASTJUDGE)
     if not os.path.exists(last_judge_file):
         raise Exception('There is not any last judge! please enter someone...')
-    with open(last_judge_file, 'r') as file:
-        problem = file.read()
-    return problem
+    return _readFile(last_judge_file)
 
 def getGlobaltConfig():
-    with open(os.path.join(DATA_ADDRESS, CONFIG_FOLDER, GLOBAL_CONFIG), 'r') as config_file:
-        config = json.load(config_file)
-    
-    return config
+    return _getJson(os.path.join(DATA_ADDRESS, DATA.CONFIG_FOLDER, DATA.GLOBAL_CONFIG))
 
 def isDevMode(): # am I using this app developer mode or normal mode?
     config = getGlobaltConfig()
     return config[DICT.DEBUG]
 
 def getTemplate():
-    with open(os.path.join(DATA_ADDRESS, TEMPLATE_FOLDER, DATA_TEMPLATE_CPP), 'r') as template_file:
-        template = template_file.read()
+    return _readFile(os.path.join(DATA_ADDRESS, DATA.TEMPLATE_FOLDER, DATA.TEMPLATE_CPP))
     
-    return template
-
 def getQuote():
-    with open(os.path.join(DATA_ADDRESS, DB_FOLDER, QUOTES_FILE), 'r') as quotes_file:
-        quotes = quotes_file.readlines()
-    
-    return quotes
+    return _readLinesFile(os.path.join(DATA_ADDRESS, DATA.DB_FOLDER, DATA.QUOTES_FILE))
 
 def getSign():
-    with open(os.path.join(DATA_ADDRESS, DB_FOLDER, SIGN_FILE), 'r') as sign_file:
-        sign = sign_file.readlines()
-    
-    return sign
-
+    return _readLinesFile(os.path.join(DATA_ADDRESS, DATA.DB_FOLDER, DATA.SIGN_FILE))
 
 def testCounter(problem):
     result = 1
-    problemFolder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER, problem)
+    problemFolder = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER, problem)
     while os.path.exists(os.path.join(problemFolder, str(result) + '.in')) and os.path.exists(os.path.join(problemFolder, str(result) + '.ans')):
         result += 1
     return result - 1
 
 
 def getConnection():
-    connection_file_path = os.path.join(DATA_ADDRESS, DB_FOLDER, CONNECTION_JSON)
+    connection_file_path = os.path.join(DATA_ADDRESS, DATA.DB_FOLDER, DATA.CONNECTION_JSON)
     if not os.path.exists(connection_file_path):
         # raise Exception('There is not any connection! please make someone...')
         return {}
@@ -67,9 +70,22 @@ def getAssetDirectory():
     return connection['asset']
 
 def getParents():
-    parent_path= os.path.join(DATA_ADDRESS, DB_FOLDER, PARENT_FILE)
+    parent_path= os.path.join(DATA_ADDRESS, DATA.DB_FOLDER, DATA.PARENT_FILE)
     if not os.path.exists(parent_path):
         raise Exception('There is not any parents file in data/db!')
-    with open(parent_path, 'r') as parent_file:
-        parent = json.load(parent_file)
-    return parent
+    return _getJson(parent_path)
+
+def getContestDB():
+    contestDB_path = os.path.join(DATA_ADDRESS, DATA.DB_FOLDER, DATA.CONTEST_DB_NAME)
+    if os.path.exists(contestDB_path):
+        contestDB = _getJson(contestDB_path)
+    else:
+        contestDB = []
+    return contestDB
+
+def checkExistenceProblem(problem_letter):
+    info = getInfo()
+    for p in info[DICT.PROBLEMS]:
+        if p[DICT.LETTER] == problem_letter:
+            return True
+    return False

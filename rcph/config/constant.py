@@ -1,31 +1,33 @@
-MAXSIGNLINE = 20
+MAXSIGNLINE = 20 # Related to quote
 
-# in current contest folder (./)
-CONTEST_INFO_JSON = 'info.json'
-TESTCASE_FOLDER = 'tc'
-RCPH_FOLDER = '.rcph'
-PARENT_PORTAL = 'parent.txt' # saved on parent directory usually
-PARENT_FILE = 'parents.json'
-TEMPLATE_CPP = 'template.cpp'
-LASTJUDGE = 'lastjudge.txt'
+# current contest
+class CURRENT:
+    CONTEST_INFO_JSON = 'info.json'
+    TESTCASE_FOLDER = 'tc'
+    RCPH_FOLDER = '.rcph'
+    TEMPLATE_CPP = 'template.cpp'
+    LASTJUDGE = 'lastjudge.txt'
 
-# input/output mode file names
-INPUT_FILE = 'input.txt'
-OUTPUT_FILE = 'output.txt'
+    # input/output mode file names
+    INPUT_FILE = 'input.txt'
+    OUTPUT_FILE = 'output.txt'
 
-# data folder
-TEMPLATE_FOLDER = 'template'
-CONFIG_FOLDER = 'config'
-DB_FOLDER = 'db'
+# global folder (data)
+class DATA:
+    # folders
+    TEMPLATE_FOLDER = 'template'
+    CONFIG_FOLDER = 'config'
+    DB_FOLDER = 'db'
 
-DATA_TEMPLATE_CPP = 'template.cpp' # in template folder
-GLOBAL_CONFIG = 'contest.json' # in config folder
-CONTEST_DB_NAME = 'contests.json' # in db folder
-QUOTES_FILE = 'quotes.txt'
-SIGN_FILE = 'sign.txt'
-CONNECTION_JSON = 'connection.json'
-ASSET_FOLDER = 'asset' # a folder for saving assets
-SAVED = 'saved' # in asset folder for saving my assets
+    TEMPLATE_CPP = 'template.cpp' # in template folder
+    GLOBAL_CONFIG = 'contest.json' # in config folder
+    CONTEST_DB_NAME = 'contests.json' # in db folder
+    QUOTES_FILE = 'quotes.txt'
+    SIGN_FILE = 'sign.txt'
+    CONNECTION_JSON = 'connection.json'
+    ASSET_FOLDER = 'asset' # a folder for saving assets
+    SAVED = 'saved' # in asset folder for saving my assets
+    PARENT_FILE = 'parents.json'
 
 # dictionary keys
 class DICT:
@@ -53,10 +55,23 @@ class DICT:
     TOP = 'top'
 
 class COMMANDS:
-    DELETE = 'delete'
-    CLEAR = 'clear'
+    CLEAR = ['clear', 'delete'] # for test cases
+    EMPTY = '--'
     TEST = 'test'
     INPUT = 'input'
     DOMJUDGE = 'domjudge'
     LS_BY_ENTER = 'ls by enter'
     HIDDEN_ITEMS = 'hidden items'
+
+# commands/info/status.py
+class PROBLEM_STATUS:
+    class COMMAND:
+        WRONG_ANSWER = ['wrong answer', 'wa',  'wrong']
+        ACCEPT = ['accept', 'correct', 'acc']
+        RAW = ['raw']
+        NULL = ['null', 'none']
+    class STATUS:
+        WRONG_ANSWER = 'Wrong Answer'
+        ACCEPT = 'Accept'
+        RAW = 'raw'
+        NULL = 'null'

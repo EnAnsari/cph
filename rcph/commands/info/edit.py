@@ -1,6 +1,6 @@
-from rcph.config.constant import *
-from rcph.utils.launcher import getInfo, setInfo
 from rcph.utils.tools.color import colored_text
+from rcph.utils.launcher import getInfo, setInfo
+from rcph.config.constant import *
 
 def inputData(sentence, value):
     input_sentence = colored_text(f'{sentence}: ', 'yellow')
@@ -9,14 +9,14 @@ def inputData(sentence, value):
     data = input(input_sentence)
     if data == '':
         return value
-    elif data == '--':
+    elif data == COMMANDS.EMPTY:
         return ''
     else:
         return data
 
 def editContest():
     print(colored_text('Welcome to contest Editor CLI\n', 'yellow', 'bold'))
-    print(colored_text('leave -- if you want change a field to empty', 'blue'))
+    print(colored_text(f'leave {COMMANDS.EMPTY} if you want change a field to empty', 'blue'))
 
     info = getInfo()
     

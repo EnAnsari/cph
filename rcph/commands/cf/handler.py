@@ -1,10 +1,8 @@
 from .utils import *
 from rcph.utils.launcher import currentIsContest
 
-def run(args):
+def run():
     if not currentIsContest():
         raise Exception('You are not in a contest directory!')
 
-    checkExistenceDir(args.address)
-    readme_content = createReadme(args.address)
-    fileWriter(args.address, readme_content)
+    print('codeforces parser is not developed yet!')

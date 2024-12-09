@@ -24,9 +24,7 @@ def createReadme(address):
     content = ''
     info = getInfo()
     link = getRelativePath(os.getcwd(), os.path.join(os.getcwd(), address))
-    print(os.path.join(os.getcwd(), address))
-    print(link)
-
+    link = link if str(link).startswith('.') else os.path.join('.', link)
 
     # create first part (name / description)
     if info[DICT.NAME]:
@@ -34,7 +32,7 @@ def createReadme(address):
     if info[DICT.LINK]:
         content += f'**contest link: [{info[DICT.LINK]}]({info[DICT.LINK]})**\n'
     if info[DICT.DETAIL]:
-        content += f'### overview\n{info[DICT.DETAIL]}\n'
+        content += f'\n{info[DICT.DETAIL]}\n'
     
     # cerate problem test case section
     if info[DICT.PROBLEMS]:
@@ -43,7 +41,7 @@ def createReadme(address):
         content += "| letter | name | status |\n"
         content += '|:---:|:---:|:---:|\n'
         for problem in info[DICT.PROBLEMS]:
-            content += f'|[{problem[DICT.LETTER].upper()}]({os.path.join(".", link, problem[DICT.LETTER] + ".cpp")})|'
+            content += f'|[{problem[DICT.LETTER].upper()}]({os.path.join(link, problem[DICT.LETTER] + ".cpp")})|'
             content += problem[DICT.NAME] if problem[DICT.NAME] else '-empty-'
             content += f'|{problem[DICT.STATUS]}|\n'
         content += '</div>\n\n'
@@ -51,7 +49,7 @@ def createReadme(address):
     content += '<br><details><summary><strong>📊 Test Cases (click to expand)</strong></summary>\n\n'
     for problem in info[DICT.PROBLEMS]:
         content += f'### problem {problem[DICT.LETTER].upper()}\n'
-        tc_folder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER, problem[DICT.LETTER])
+        tc_folder = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER, problem[DICT.LETTER])
         counter = 1
         while True:
             input_path = os.path.join(tc_folder, str(counter) + '.in')

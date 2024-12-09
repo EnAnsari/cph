@@ -1,9 +1,8 @@
-from .utils import *
+from .utils import getSourcePath, copyFile, walkInTemplate
 
 def run(args):
-    src = args.src
-    des = args.des if args.des else None
-    
-    src_path = getSourcePath(src)
-    
-    copyFile(src_path, des)
+    if not args.src:
+        walkInTemplate()
+    else:
+        src_path = getSourcePath(args.src)
+        copyFile(src_path, args.des)

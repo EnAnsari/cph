@@ -25,10 +25,7 @@ def main():
         except Exception as e:
             print_error(str(e))
     else:
-        try:
-            run()
-        except KeyboardInterrupt:
-            print('\nbye bye! see you again!')
+        run()
 
 
 if __name__ == "__main__":

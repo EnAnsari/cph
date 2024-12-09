@@ -1,21 +1,22 @@
-from rcph.utils.imports import json, os
+from rcph.utils.imports import os
 from rcph.config.constant import *
 from rcph.utils.launcher import getGlobaltConfig
 
-def makeLocalConfig(folder_path, contest_path, contest, parent):
+# making .rcph/info.json
+def makeLocalConfig(contest_path, contest_link, parent, problems):
     config = getGlobaltConfig()
 
     data = {
-        DICT.NAME: contest[DICT.NAME],
-        DICT.PARENT: config[DICT.DEFAULT_PARENT] if parent == '' else parent,
+        DICT.NAME: os.path.basename(contest_path),
+        DICT.PARENT: parent,
         DICT.PATH: contest_path,
-        DICT.LINK: contest[DICT.LINK],
-        DICT.DETAIL: contest[DICT.DETAIL],
-        DICT.REPO: contest[DICT.REPO],
+        DICT.LINK: contest_link,
+        DICT.DETAIL: '',
+        DICT.REPO: '',
         DICT.PROBLEMS: [],
     }
 
-    for problem_letter in contest[DICT.PROBLEMS]:
+    for problem_letter in problems:
         problem = {
             DICT.LETTER: problem_letter,
             DICT.NAME: '',
@@ -23,6 +24,5 @@ def makeLocalConfig(folder_path, contest_path, contest, parent):
         }
         
         data[DICT.PROBLEMS].append(problem)
-
-    with open(os.path.join(folder_path, CONTEST_INFO_JSON), 'w') as json_file:
-        json.dump(data, json_file, indent=4)
+    return data
+    

@@ -1,16 +1,19 @@
-from rcph.utils.imports import os, datetime, json
+from rcph.utils.imports import datetime
 from .quote import make_a_quote
 from rcph.config.constant import *
-from ..launcher import getSign, getQuote, getGlobaltConfig
+from ..launcher import getSign, getQuote, getGlobaltConfig, getInfo
 
-def makeSign(folder_path, problem_letter):
+def makeSign(contest_path, problem_letter):
 
     quotes = getQuote()
     local_sign = getSign()
     config = getGlobaltConfig()
-
-    with open(os.path.join(folder_path, RCPH_FOLDER, CONTEST_INFO_JSON), 'r') as file:
-        contest = json.load(file)
+    contest = getInfo(contest_path)
+    local_time = datetime.datetime.now(datetime.timezone.utc).astimezone()
+    utc_offset = local_time.utcoffset()
+    utc_offset_hours = int(utc_offset.total_seconds() // 3600)
+    utc_offset_minutes = int((utc_offset.total_seconds() % 3600) // 60)
+    formatted_offset = f"{utc_offset_hours:+}:{utc_offset_minutes:02}"
 
     sign_content = '/*\n'
 
@@ -27,7 +30,7 @@ def makeSign(folder_path, problem_letter):
 
         sign_content += f'\tproblem name: {problem_name}\n' if problem_name else ''
         sign_content += f'\tproblem letter: {problem_letter.upper()}\n'
-        sign_content += f'\tTime: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M")}\n\n' # Time
+        sign_content += f'\tTime: {local_time.strftime("%Y-%m-%d %H:%M")} UTC: {formatted_offset}\n\n' # Time
 
     if config[DICT.SIGN_DETAIL][DICT.PERSONAL_SIGN]:
         for line in local_sign:

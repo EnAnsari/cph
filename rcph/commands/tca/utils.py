@@ -16,7 +16,7 @@ def clearTestCasesOfProblem(folder):
 
 def clearTestCases():
     info = getInfo()
-    tc_folder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER)
+    tc_folder = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER)
     for problem in info[DICT.PROBLEMS]:
         problem_tc = os.path.join(tc_folder, problem[DICT.LETTER])
         if os.path.exists(problem_tc):
@@ -50,13 +50,11 @@ def addTestcase(folder, num):
 
 
 def createTest(problem):
-    problemFolder = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER, problem)
-    if not os.path.exists(problemFolder):
-        raise Exception(f'problem {problem} not found!')
+    problemFolder = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER, problem)
     testNum = testCounter(problem)
     num = input(colored_text(f'Availabe test(s): {testNum}, how many to add? ', 'yellow'))
     
-    if num in [COMMANDS.DELETE, COMMANDS.CLEAR]:
+    if num in COMMANDS.CLEAR:
         clearTestCasesOfProblem(problemFolder)
 
     num = int(num) if num.isdigit() else 0
@@ -66,7 +64,7 @@ def createTest(problem):
 
 
 def totalAdding():
-    tc = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER)
+    tc = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER)
     entries = os.listdir(tc)
     folders = [entry for entry in entries if os.path.isdir(os.path.join(tc, entry))]
     folders.sort()
@@ -74,9 +72,9 @@ def totalAdding():
         print(colored_text(f'Problem {problem}...', 'magneta'))
         createTest(problem)
 
-
+# copy and paste sample zip files in tc folder
 def domjudge():
-    tc = os.path.join(os.getcwd(), RCPH_FOLDER, TESTCASE_FOLDER)
+    tc = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER)
     files = os.listdir(tc)
     for file in files:
         if file.endswith('.zip'):

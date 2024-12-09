@@ -3,9 +3,9 @@
     "sign": true,
     "sgin detail": {
         "side": "bottom",
-        "contest info": false,
+        "contest info": true,
         "personal sign": true,
-        "quote": false,
+        "quote": true,
         "about": true
     },
     "debug": true,
