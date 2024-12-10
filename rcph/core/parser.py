@@ -8,11 +8,9 @@ from rcph.commands.tca.handler import run as tca_runner
 from rcph.commands.judge.handler import run as judge_runner
 from rcph.commands.make.handler import run as make_runner
 from rcph.commands.cp.handler import run as cp_runner
-from rcph.commands.addq.handler import run as addq_runner
-from rcph.commands.delq.handler import run as delq_renner
 from rcph.commands.readme.handler import run as readme_runnder
+from rcph.commands.question.handler import run as question_runner
 from rcph.commands.asset.handler import run as asset_runner
-from rcph.commands.save.handler import run as save_runner
 from rcph.commands.search.handler import run as search_runner
 from rcph.commands.globall.handler import run as global_runner
 from rcph.commands.tcbank.handler import run as tcbank_runner
@@ -68,21 +66,18 @@ def create_parser():
     add_subcommand("readme", readme_runnder, "Create a readme file", aliases=["md"],
         arguments=[{"args": ["address"], "kwargs": {"help": "Address of the readme file"}}],
     )
-    # add_subcommand("addq", addq_runner, "Add question",
-    #     arguments=[
-    #         {"args": ["problem"], "kwargs": {"help": "Problem name"}},
-    #         {"args": ["nofile_flag"], "kwargs": {"nargs": "?", "help": "Flag to skip file creation"}},
-    #     ],
-    # )
-    # add_subcommand("delq", delq_renner, "Delete question",
-    #     arguments=[{"args": ["problem"], "kwargs": {"help": "Problem name"}}],
-    # )
-    # add_subcommand("asset", asset_runner, "Asset file bringer", aliases=["ass"],
-    #     arguments=[{"args": ["connect"], "kwargs": {"nargs": "?", "help": "Connect to an asset folder"}}],
-    # )
-    # add_subcommand("save", save_runner, "Save a file in the asset folder",
-    #     arguments=[{"args": ["file"], "kwargs": {"help": "File to save in asset/saved"}}],
-    # )
+    add_subcommand("question", question_runner, "add and remove problems", aliases=['q'],
+        arguments=[
+            {"args": ["operation"], "kwargs": {"help": "operation add or remove"}},
+            {"args": ["problem"], "kwargs": {"help": "problem letter"}},
+        ],
+    )
+    add_subcommand("asset", asset_runner, "Asset file bringer", aliases=["ass"],
+        arguments=[
+            {"args": ["subcommand"], "kwargs": {"nargs": "?", "help": "Connect to asset or Save"}},
+            {"args": ["file"], "kwargs": {"nargs": "?", "help": "file to save"}}
+        ],
+    )
     # add_subcommand("tcbank", tcbank_runner, "Search in the test case bank", aliases=["tcb"],
     #     arguments=[{"args": ["problem"], "kwargs": {"help": "Problem to search or connect"}}],
     # )

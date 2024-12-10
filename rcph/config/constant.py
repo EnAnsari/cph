@@ -63,6 +63,10 @@ class COMMANDS:
     LS_BY_ENTER = 'ls by enter'
     HIDDEN_ITEMS = 'hidden items'
 
+    # problem add or remove:
+    ADD = ['add', 'a']
+    DELETE = ['del', 'remove', 'rm', 'delete']
+
 # commands/info/status.py
 class PROBLEM_STATUS:
     class COMMAND:

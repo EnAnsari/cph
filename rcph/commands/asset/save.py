@@ -3,7 +3,8 @@ from rcph.utils.launcher import getGlobaltConfig, getConnection
 from rcph.utils.tools.color import colored_text
 from rcph.utils.tools.clear import clear_terminal
 from rcph.config.constant import *
-from rcph.commands.asset.utils import advancedListDIR, prompt, prompt_toolkit, DirectoryCompleter, Style, InMemoryHistory
+from .utils import DirectoryCompleter, advancedListDIR
+from .launch import InMemoryHistory, Style, prompt
 
 def checkExistence(file):
     file_path = os.path.join(os.getcwd(), file)
@@ -13,12 +14,12 @@ def checkExistence(file):
 
 
 def explore():
-    print(colored_text('you can use this commands: save, mkdir, rmdir, ls, clear, and direcotry name to enter', 'yellow'))
+    print(colored_text('you can use this commands: save, mkdir, rmdir, rm, ls, clear, and direcotry name to enter', 'yellow'))
     config = getGlobaltConfig()
     hidden_items = config[COMMANDS.HIDDEN_ITEMS]
     connection = getConnection()
     
-    dir = os.path.join(connection[ASSET_FOLDER], SAVED)
+    dir = os.path.join(connection[DATA.ASSET_FOLDER], DATA.SAVED)
     os.makedirs(dir, exist_ok=True)
     curr, curr_show = dir, ''
 
@@ -67,6 +68,16 @@ def explore():
                         print(colored_text(f'{dir_name} is not empty!', 'red'))
                 else:
                     print(colored_text(f'{dir_name} is not exist!', 'red'))
+
+            # handle 'rm' command for deleting files
+            elif user_input.lower().startswith('rm '):
+                file_name = user_input[3:].strip()
+                file_path = os.path.join(curr, file_name)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+                    print(colored_text(f'{file_name} successfully removed!', 'green'))
+                else:
+                    print(colored_text(f'{file_name} is not a file!', 'red'))
 
             # handle ls command
             elif user_input.lower() == "ls":

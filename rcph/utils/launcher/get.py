@@ -89,3 +89,10 @@ def checkExistenceProblem(problem_letter):
         if p[DICT.LETTER] == problem_letter:
             return True
     return False
+
+def getAssetShortcuts():
+    connection = getConnection()
+    if not connection:
+        raise Exception('connection file is empty!')
+    shorcut = _getJson(os.path.join(connection['asset'], '.shortcut.json'))
+    return {os.path.join(connection['asset'], *key.split('/')[1:]) : value for key, value in shorcut.items()}
