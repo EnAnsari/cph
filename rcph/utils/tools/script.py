@@ -13,7 +13,7 @@ def getProblemScript(contest_path, problem_letter, script=None):
     sign_flag = config[DICT.SIGN]
 
     if sign_flag:
-        if config[DICT.SIGN_DETAIL][DICT.SIDE] == DICT.TOP:
+        if config[DICT.SIGN_DETAIL][DICT.SIDE].lower() in DICT.TOP:
             script = makeSign(contest_path, problem_letter) + '\n' + template
         else: # bottom
             script = template + '\n' + makeSign(contest_path, problem_letter)

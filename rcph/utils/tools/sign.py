@@ -18,14 +18,15 @@ def makeSign(contest_path, problem_letter):
     sign_content = '/*\n'
 
     if config[DICT.SIGN_DETAIL][DICT.CONTEST_INFO]:
-        sign_content += f'\tcontest name: {contest["name"]}\n' if contest['name'] else ''
-        sign_content += f'\tcontest link: {contest["link"]}\n' if contest['link'] else ''
-        sign_content += f'\tmy code repository: {contest["repo"]}\n' if contest['repo'] else ''
+        sign_content += f'\tcontest name: {contest[DICT.NAME]}\n' if contest[DICT.NAME] else ''
+        sign_content += f'\tcontest link: {contest[DICT.LINK]}\n' if contest[DICT.LINK] else ''
+        sign_content += f'\tcontest detail: {contest[DICT.DETAIL]}\n' if contest[DICT.DETAIL] else ''
+        sign_content += f'\tmy code repository: {contest[DICT.REPO]}\n' if contest[DICT.REPO] else ''
 
         problem_name = ''
-        for problem in contest['problems']:
-            if problem['letter'] == problem_letter:
-                problem_name = problem['name']
+        for problem in contest[DICT.PROBLEMS]:
+            if problem[DICT.LETTER] == problem_letter:
+                problem_name = problem[DICT.NAME]
                 break
 
         sign_content += f'\tproblem name: {problem_name}\n' if problem_name else ''

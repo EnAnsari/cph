@@ -1,5 +1,5 @@
 from rcph.utils.imports import os, shutil, prompt_toolkit, sys, pathlib
-from rcph.utils.launcher import setConnection, getAssetDirectory, getGlobaltConfig, getConnection, getAssetShortcuts
+from rcph.utils.launcher import setConnection, getGlobaltConfig, getConnection, getAssetShortcuts
 from rcph.utils.tools.color import colored_text
 from rcph.utils.tools.clear import clear_terminal
 from rcph.config.constant import *
@@ -12,8 +12,9 @@ from .utils import DirectoryCompleter, advancedListDIR
 
 def makeConnection():
     connection = getConnection()
-    connection['asset'] = os.getcwd()
+    connection[DATA.ASSET_FOLDER] = os.getcwd()
     setConnection(connection)
+    print(colored_text(f'{os.getcwd()} connected as asset folder successfully!', 'green'))
 
 def explore(dir):
     config = getGlobaltConfig()
@@ -99,7 +100,10 @@ def explore(dir):
 
 
 def getAssetFile():
-    dir = getAssetDirectory()
+    connection = getConnection()
+    dir = None
+    if DATA.ASSET_FOLDER in connection:
+        dir = connection[DATA.ASSET_FOLDER]
     if not dir:
         raise Exception('asset directory is empty! please connect someone!')
     

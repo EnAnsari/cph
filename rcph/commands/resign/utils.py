@@ -4,7 +4,7 @@ from rcph.utils.tools.script import getProblemScript
 from rcph.config.constant import *
 from rcph.utils.tools.color import colored_text
 
-def resignProblem(problem):
+def resignProblem(problem, silent=None):
     problem_path = os.path.join(os.getcwd(), problem + '.cpp')
     with open(problem_path, 'r') as f:
         content = f.readlines()
@@ -22,9 +22,10 @@ def resignProblem(problem):
     with open(problem_path, 'w') as f:
         f.write(new_script)
     
-    print(colored_text(f'problelm {problem.upper()} resigned successfully!', 'green'))
+    if not silent:
+        print(colored_text(f'problelm {problem.upper()} resigned successfully!', 'green'))
 
-def multiResign():
+def multiResign(silent=None):
     info = getInfo()
     for p in info[DICT.PROBLEMS]:
-        resignProblem(p[DICT.LETTER])
+        resignProblem(p[DICT.LETTER], silent)

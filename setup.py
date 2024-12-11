@@ -30,6 +30,9 @@ setup(
     packages= find_packages(),
     install_requires=[
         'prompt_toolkit',
+        'tqdm',
+        'selenium',
+        'beautifulsoup4',
         # Add other dependencies if needed
     ],
     python_requires='>=3.7',  # Specify the minimum Python version

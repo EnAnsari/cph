@@ -1,11 +1,8 @@
 from rcph.utils.imports import os
 from rcph.config.constant import *
-from rcph.utils.launcher import getGlobaltConfig
 
 # making .rcph/info.json
 def makeLocalConfig(contest_path, contest_link, parent, problems):
-    config = getGlobaltConfig()
-
     data = {
         DICT.NAME: os.path.basename(contest_path),
         DICT.PARENT: parent,

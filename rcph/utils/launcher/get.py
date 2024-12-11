@@ -57,17 +57,21 @@ def testCounter(problem):
 
 def getConnection():
     connection_file_path = os.path.join(DATA_ADDRESS, DATA.DB_FOLDER, DATA.CONNECTION_JSON)
-    if not os.path.exists(connection_file_path):
-        # raise Exception('There is not any connection! please make someone...')
-        return {}
-    with open(connection_file_path, 'r') as connection_file:
-        connection = json.load(connection_file)
+    try:
+        if not os.path.exists(connection_file_path):
+            # raise Exception('There is not any connection! please make someone...')
+            return {}
+        with open(connection_file_path, 'r') as connection_file:
+            connection = json.load(connection_file)
+    except:
+        connection = {}
     return connection
 
 
 def getAssetDirectory():
     connection = getConnection()
-    return connection['asset']
+    return connection[DATA.ASSET_FOLDER]
+
 
 def getParents():
     parent_path= os.path.join(DATA_ADDRESS, DATA.DB_FOLDER, DATA.PARENT_FILE)
@@ -94,5 +98,5 @@ def getAssetShortcuts():
     connection = getConnection()
     if not connection:
         raise Exception('connection file is empty!')
-    shorcut = _getJson(os.path.join(connection['asset'], '.shortcut.json'))
-    return {os.path.join(connection['asset'], *key.split('/')[1:]) : value for key, value in shorcut.items()}
+    shorcut = _getJson(os.path.join(connection[DATA.ASSET_FOLDER], '.shortcut.json'))
+    return {os.path.join(connection[DATA.ASSET_FOLDER], *key.split('/')[1:]) : value for key, value in shorcut.items()}

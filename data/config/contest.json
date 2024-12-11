@@ -10,5 +10,6 @@
     },
     "debug": true,
     "ls by enter": true,
-    "hidden items": false
+    "hidden items": false,
+    "chromedriver": "/home/mateo/data/program/chromedriver-linux64/chromedriver"
 }

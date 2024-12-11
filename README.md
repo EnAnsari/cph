@@ -58,6 +58,7 @@ cd chp
 
 </details><br>
 
+[google chrome driver download link](https://googlechromelabs.github.io/chrome-for-testing/)
 
 # TODO list
 - [ ] Create a professional README

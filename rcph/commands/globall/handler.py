@@ -1,4 +1,4 @@
-from .utils import *
+from .utils import explore
 
-def run(args):
-    pass
+def run():
+    explore()

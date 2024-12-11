@@ -28,6 +28,8 @@ class DATA:
     ASSET_FOLDER = 'asset' # a folder for saving assets
     SAVED = 'saved' # in asset folder for saving my assets
     PARENT_FILE = 'parents.json'
+    
+    TCBANK = 'tcbank'
 
 # dictionary keys
 class DICT:
@@ -40,6 +42,7 @@ class DICT:
     QUOTE = 'quote'
     ABOUT = 'about'
     DEBUG = 'debug'
+    CHROMEDRIVER = 'chromedriver'
     
     # contest info file
     NAME = 'name'
@@ -52,7 +55,7 @@ class DICT:
     PROBLEMS = 'problems'
     STATUS = 'status'
     NULL = 'null'
-    TOP = 'top'
+    TOP = ['top', 'up']
 
 class COMMANDS:
     CLEAR = ['clear', 'delete'] # for test cases

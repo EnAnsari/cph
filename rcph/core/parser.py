@@ -13,7 +13,6 @@ from rcph.commands.question.handler import run as question_runner
 from rcph.commands.asset.handler import run as asset_runner
 from rcph.commands.search.handler import run as search_runner
 from rcph.commands.globall.handler import run as global_runner
-from rcph.commands.tcbank.handler import run as tcbank_runner
 
 # Create the argument parser
 def create_parser():
@@ -78,10 +77,9 @@ def create_parser():
             {"args": ["file"], "kwargs": {"nargs": "?", "help": "file to save"}}
         ],
     )
-    # add_subcommand("tcbank", tcbank_runner, "Search in the test case bank", aliases=["tcb"],
-    #     arguments=[{"args": ["problem"], "kwargs": {"help": "Problem to search or connect"}}],
-    # )
-    # add_subcommand("global", global_runner, "Explore contests")
-    # add_subcommand("search", search_runner, "Search functionality")
+    add_subcommand("global", global_runner, "Explore contests")
+    add_subcommand("search", search_runner, "Search functionality",
+        arguments=[{"args": ["connect"], "kwargs": {'nargs': "?", "help": "connecting tcbank to rcph"}}]
+    )
 
     return parser

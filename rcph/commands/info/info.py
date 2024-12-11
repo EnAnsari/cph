@@ -28,8 +28,8 @@ def showProblemInfo(problem):
         'status:', showStatus(problem[DICT.STATUS]) 
     )
 
-def showInfo():
-    info = getInfo()
+def showInfo(info_arg=None):
+    info = info_arg or getInfo()
 
     print(colored_text('About Contest CLI', 'yellow', 'bold'))
 
