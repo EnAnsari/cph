@@ -23,7 +23,8 @@ def explore(dir):
     
     while True:
         try:
-            user_input = prompt(f"{curr_show.replace('\\', '/')}> ", completer=completer, style=style, history=history).strip()
+            curr_show = curr_show.replace('\\', '/')
+            user_input = prompt(f"{curr_show}> ", completer=completer, style=style, history=history).strip()
             path = os.path.join(curr, *user_input.split('/'))
 
             # handle empty input
