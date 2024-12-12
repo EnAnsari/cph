@@ -30,6 +30,7 @@ class DATA:
     PARENT_FILE = 'parents.json'
     
     TCBANK = 'tcbank'
+    CHROMEDRIVER = 'chromedriver'
 
 # dictionary keys
 class DICT:
@@ -42,7 +43,6 @@ class DICT:
     QUOTE = 'quote'
     ABOUT = 'about'
     DEBUG = 'debug'
-    CHROMEDRIVER = 'chromedriver'
     
     # contest info file
     NAME = 'name'

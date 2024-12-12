@@ -1,14 +1,8 @@
 from rcph.utils.imports import os, tqdm, shutil
-from rcph.utils.launcher import getInfo, getContestDB, getConnection, setConnection
+from rcph.utils.launcher import getInfo, getContestDB, getConnection
 from rcph.utils.tools.color import colored_text
 from rcph.config.constant import *
 from rcph.commands.globall.utils import copyContest
-
-def connectTCBank():
-    connection = getConnection()
-    connection[DATA.TCBANK] = os.getcwd()
-    setConnection(connection)
-    print(colored_text(f'{os.getcwd()} connected as tcbank successfully!', 'green'))
 
 def contestName():
     name = input(colored_text('Enter Contest Name for Search (. for current contest name): ', 'yellow')).strip()
@@ -20,6 +14,9 @@ def contestName():
     counter = 0
     for contest in tqdm.tqdm(db, desc='searching', leave=False):
         if os.getcwd() == contest:
+            continue
+        if not os.path.exists(contest):
+            print(colored_text(f'contest by path {contest} not exist!', 'red'))
             continue
         contest_info = getInfo(contest)
         if name.lower() in contest_info[DICT.NAME].lower():
@@ -42,6 +39,9 @@ def problemName():
     counter = 0
     for contest in tqdm.tqdm(db, desc='searching', leave=False):
         if os.getcwd() == contest:
+            continue
+        if not os.path.exists(contest):
+            print(colored_text(f'contest by path {contest} not exist!', 'red'))
             continue
         contest_info = getInfo(contest)
         contest_problems = [problem for problem in contest_info[DICT.PROBLEMS] if problem[DICT.NAME]]
@@ -76,6 +76,9 @@ def tcSaved():
     counter = 0
     for contest in tqdm.tqdm(db, desc='searching', leave=False): # iterate in contests in db (1)
         if os.getcwd() == contest:
+            continue
+        if not os.path.exists(contest):
+            print(colored_text(f'contest by path {contest} not exist!', 'red'))
             continue
         found_flag = False
         

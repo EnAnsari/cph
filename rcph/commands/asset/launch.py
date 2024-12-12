@@ -1,20 +1,9 @@
-from rcph.utils.imports import os, shutil, prompt_toolkit, sys, pathlib
-from rcph.utils.launcher import setConnection, getGlobaltConfig, getConnection, getAssetShortcuts
+from rcph.utils.imports import os, shutil, sys, pathlib, prompt, Style, InMemoryHistory
+from rcph.utils.launcher import getGlobaltConfig, getConnection, getAssetShortcuts
 from rcph.utils.tools.color import colored_text
 from rcph.utils.tools.clear import clear_terminal
 from rcph.config.constant import *
-
-from prompt_toolkit import prompt
-from prompt_toolkit.styles import Style
-from prompt_toolkit.history import InMemoryHistory
-
 from .utils import DirectoryCompleter, advancedListDIR
-
-def makeConnection():
-    connection = getConnection()
-    connection[DATA.ASSET_FOLDER] = os.getcwd()
-    setConnection(connection)
-    print(colored_text(f'{os.getcwd()} connected as asset folder successfully!', 'green'))
 
 def explore(dir):
     config = getGlobaltConfig()

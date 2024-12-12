@@ -172,4 +172,5 @@ local_*.py
 data/db/*
 !data/db/sign.txt
 !data/db/quotes.txt
+!data/db/parents.json
 rcph/config/data.py

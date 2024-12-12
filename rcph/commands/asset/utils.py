@@ -1,5 +1,4 @@
-from rcph.utils.imports import os, prompt_toolkit
-from prompt_toolkit.completion import Completer, Completion
+from rcph.utils.imports import os, Completer, Completion
 from rcph.utils.tools.color import colored_text
 
 class DirectoryCompleter(Completer):

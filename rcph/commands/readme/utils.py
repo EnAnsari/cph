@@ -1,5 +1,4 @@
-from rcph.utils.imports import os, pathlib
-from pathlib import Path
+from rcph.utils.imports import os, Path
 from rcph.config.constant import *
 from rcph.utils.launcher import getInfo, getSign
 from rcph.utils.tools.color import colored_text

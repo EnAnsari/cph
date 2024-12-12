@@ -13,6 +13,7 @@ from rcph.commands.question.handler import run as question_runner
 from rcph.commands.asset.handler import run as asset_runner
 from rcph.commands.search.handler import run as search_runner
 from rcph.commands.globall.handler import run as global_runner
+from rcph.commands.connect.handler import run as connect_runner
 
 # Create the argument parser
 def create_parser():
@@ -73,13 +74,13 @@ def create_parser():
     )
     add_subcommand("asset", asset_runner, "Asset file bringer", aliases=["ass"],
         arguments=[
-            {"args": ["subcommand"], "kwargs": {"nargs": "?", "help": "Connect to asset or Save"}},
+            {"args": ["subcommand"], "kwargs": {"nargs": "?", "help": "Saving a file"}},
             {"args": ["file"], "kwargs": {"nargs": "?", "help": "file to save"}}
         ],
     )
     add_subcommand("global", global_runner, "Explore contests")
-    add_subcommand("search", search_runner, "Search functionality",
-        arguments=[{"args": ["connect"], "kwargs": {'nargs': "?", "help": "connecting tcbank to rcph"}}]
+    add_subcommand("search", search_runner, "Search functionality")
+    add_subcommand('connect', connect_runner, 'connecting tcbank, asset, chromedriver',
+        arguments=[{'args': ['file'], 'kwargs': {'nargs': '?', 'help': 'if we want to choose a file'}}]
     )
-
     return parser

@@ -59,7 +59,7 @@ def createContestInFolder(folder_path, parent, test):
     print(f'\nyour contest created {colored_text("successfully", "green", "bold")}!')
 
 def createContestByFolder(folder_name, parent, test):
-    folder_path = os.path.join(os.getcwd(), folder_name)
+    folder_path = os.path.join(os.getcwd(), folder_name).replace('\\', '/') # replace for windows platform
     if os.path.exists(folder_path):
         raise Exception(f'{folder_name} was exist before!')
     problems = getProblems()

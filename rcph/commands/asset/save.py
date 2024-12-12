@@ -1,10 +1,9 @@
-from rcph.utils.imports import os, sys, shutil
+from rcph.utils.imports import os, sys, shutil, prompt, Style, InMemoryHistory
 from rcph.utils.launcher import getGlobaltConfig, getConnection
 from rcph.utils.tools.color import colored_text
 from rcph.utils.tools.clear import clear_terminal
 from rcph.config.constant import *
 from .utils import DirectoryCompleter, advancedListDIR
-from .launch import InMemoryHistory, Style, prompt
 
 def checkExistence(file):
     file_path = os.path.join(os.getcwd(), file)
@@ -19,6 +18,12 @@ def explore():
     hidden_items = config[COMMANDS.HIDDEN_ITEMS]
     connection = getConnection()
     
+    dir = None
+    if DATA.ASSET_FOLDER in connection:
+        dir = connection[DATA.ASSET_FOLDER]
+    if not dir:
+        raise Exception('asset directory is empty! please connect someone!')
+
     dir = os.path.join(connection[DATA.ASSET_FOLDER], DATA.SAVED)
     os.makedirs(dir, exist_ok=True)
     curr, curr_show = dir, ''

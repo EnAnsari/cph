@@ -67,7 +67,7 @@ I put a structure of the project in the contributing section. In general, I trie
 I also used [constant.py](./rcph/config/constant.py) to put most of the frequently used variables, including some frequently used commands, here so that changes can be easily applied to the entire program at once.
 
 ## More Feautres
-To use the [codeforces](https://codeforces.com) switch (a powerful parser for Codeforces competitions), you must also install the [chrome driver](https://googlechromelabs.github.io/chrome-for-testing/) and put its address in the [config file](./data/config/contest.json).
+To use the [codeforces](https://codeforces.com) switch (a powerful parser for Codeforces competitions), you must also install the [chrome driver](https://googlechromelabs.github.io/chrome-for-testing/) and put its address in the connection.json by `connection` switch.
 
 
 ## Future Works
@@ -93,6 +93,10 @@ We welcome contributions to this project! I tried to make this project as modula
 │   │   ├── save.py # save a new code to assets
 │   │   └── utils.py
 │   ├── cf # codeforces parser (parsing by link and magic ;)
+│   │   ├── handler.py
+│   │   ├── __init__.py
+│   │   └── utils.py
+│   ├── connect # for connecting asset, tcbank and chromedriver
 │   │   ├── handler.py
 │   │   ├── __init__.py
 │   │   └── utils.py

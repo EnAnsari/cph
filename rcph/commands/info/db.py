@@ -1,4 +1,3 @@
-from rcph.utils.imports import os
 from rcph.utils.launcher import getContestDB, setContestDB, getInfo
 from rcph.utils.tools.color import colored_text
 from rcph.config.constant import *

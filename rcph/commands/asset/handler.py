@@ -1,9 +1,7 @@
-from .launch import makeConnection, getAssetFile
+from .launch import getAssetFile
 from .save import checkExistence, explore, fileSaving
 def run(args):
-    if args.subcommand == 'connect':
-        makeConnection()
-    elif args.subcommand in ['save', '+']:
+    if args.subcommand in ['save', '+']:
         if not args.file:
             raise Exception('file switch is required for save operation!')
         file_path = checkExistence(args.file)

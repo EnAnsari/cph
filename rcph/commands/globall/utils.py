@@ -1,8 +1,4 @@
-from rcph.utils.imports import os, prompt_toolkit, sys, subprocess, shutil
-from prompt_toolkit.completion import Completer, Completion
-from prompt_toolkit import prompt
-from prompt_toolkit.styles import Style
-from prompt_toolkit.history import InMemoryHistory
+from rcph.utils.imports import os, sys, subprocess, shutil, Completer, Completion, prompt, Style, InMemoryHistory
 from rcph.utils.tools.color import colored_text
 from rcph.utils.tools.clear import clear_terminal
 from rcph.utils.launcher import getContestDB, getInfo

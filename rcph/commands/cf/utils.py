@@ -1,15 +1,11 @@
-from rcph.utils.imports import os, re, bs4, selenium, sys
-from rcph.utils.launcher import getInfo, getGlobaltConfig, setInfo
+from rcph.utils.imports import os, re, Service, Options, BeautifulSoup, webdriver
+from rcph.utils.launcher import getInfo, setInfo, getConnection
 from rcph.utils.tools.script import getProblemScript
 from rcph.utils.tools.color import colored_text
 from rcph.commands.resign.utils import multiResign
 from rcph.config.constant import *
 
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from bs4 import BeautifulSoup
+
 
 def checkCFlink():
     info = getInfo()
@@ -28,16 +24,13 @@ def getSoup():
     chrome_options = Options()
     # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--no-sandbox")   
+    chrome_options.add_argument("--no-sandbox")
     try:
-        if sys.platform == 'win32':
-            chromedrive_path = os.path.join(*getGlobaltConfig()[DICT.CHROMEDRIVER].split('/'))
-        else:
-            chromedrive_path = os.path.join('/', *getGlobaltConfig()[DICT.CHROMEDRIVER].split('/'))
+        chromedrive_path = getConnection()[DATA.CHROMEDRIVER]
         service = Service(chromedrive_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
     except Exception as e:
-        raise Exception(f'chrome driver path in global config is incorrect!')
+        raise Exception(f'chrome driver path in connection.json is incorrect!')
 
     try:
         # Open the page
