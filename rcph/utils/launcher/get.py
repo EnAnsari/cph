@@ -98,5 +98,8 @@ def getAssetShortcuts():
     connection = getConnection()
     if not connection:
         raise Exception('connection file is empty!')
-    shorcut = _getJson(os.path.join(connection[DATA.ASSET_FOLDER], '.shortcut.json'))
+    shorcut_path = os.path.join(connection[DATA.ASSET_FOLDER], '.shortcut.json')
+    if not os.path.exists(shorcut_path):
+        return {}
+    shorcut = _getJson(shorcut_path)
     return {os.path.join(connection[DATA.ASSET_FOLDER], *key.split('/')[1:]) : value for key, value in shorcut.items()}

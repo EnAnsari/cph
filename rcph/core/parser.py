@@ -78,7 +78,7 @@ def create_parser():
             {"args": ["file"], "kwargs": {"nargs": "?", "help": "file to save"}}
         ],
     )
-    add_subcommand("global", global_runner, "Explore contests")
+    add_subcommand("global", global_runner, "Explore contests", aliases=['explore'])
     add_subcommand("search", search_runner, "Search functionality")
     add_subcommand('connect', connect_runner, 'connecting tcbank, asset, chromedriver',
         arguments=[{'args': ['file'], 'kwargs': {'nargs': '?', 'help': 'if we want to choose a file'}}]

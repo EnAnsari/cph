@@ -13,7 +13,7 @@ def contestName():
     db = getContestDB()
     counter = 0
     for contest in tqdm.tqdm(db, desc='searching', leave=False):
-        if os.getcwd() == contest:
+        if os.getcwd().replace('\\', '/') == contest:
             continue
         if not os.path.exists(contest):
             print(colored_text(f'contest by path {contest} not exist!', 'red'))
@@ -38,7 +38,7 @@ def problemName():
     db = getContestDB()
     counter = 0
     for contest in tqdm.tqdm(db, desc='searching', leave=False):
-        if os.getcwd() == contest:
+        if os.getcwd().replace('\\', '/') == contest:
             continue
         if not os.path.exists(contest):
             print(colored_text(f'contest by path {contest} not exist!', 'red'))
@@ -75,7 +75,7 @@ def tcSaved():
     db = getContestDB()
     counter = 0
     for contest in tqdm.tqdm(db, desc='searching', leave=False): # iterate in contests in db (1)
-        if os.getcwd() == contest:
+        if os.getcwd().replace('\\', '/') == contest:
             continue
         if not os.path.exists(contest):
             print(colored_text(f'contest by path {contest} not exist!', 'red'))

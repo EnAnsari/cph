@@ -19,6 +19,7 @@ def copyFile(src, des):
 
     des_path = os.path.join(des_path, des.split('/')[-1])
     shutil.copy(src, des_path)
+    print(colored_text('file copied successfully!', 'green'))
 
 def walkInTemplate(directory = os.path.join(DATA_ADDRESS, DATA.TEMPLATE_FOLDER), prefix=""):
     print(colored_text(f"{prefix}{os.path.basename(directory)}/", 'yellow'))

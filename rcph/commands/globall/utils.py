@@ -54,10 +54,13 @@ def openCode(folder_path):
         if not os.path.isdir(folder_path):
             print(colored_text(f"The folder '{folder_path}' does not exist!", 'red'))
         else:
-            subprocess.run(["code", folder_path], check=True)
+            if sys.platform == 'win32':
+                subprocess.Popen(["code", folder_path], shell=True)
+            else:
+                subprocess.run(["code", folder_path], check=True)
             print(colored_text(f"Opened '{folder_path}' in VS Code successfully!", 'green'))
     except FileNotFoundError as e:
-        print(colored_text(e, 'red'))
+        print(colored_text(f'file not found: {e}', 'red'))
     except subprocess.CalledProcessError as e:
         print(colored_text(f"Failed to open VS Code: {e}"), 'red')
     except Exception as e:

@@ -27,7 +27,7 @@ def createReadme(address):
 
     # create first part (name / description)
     if info[DICT.NAME]:
-        content += f'# 🚀 {info[DICT.NAME]} contest\n'
+        content += f'# {info[DICT.NAME]} contest\n'
     if info[DICT.LINK]:
         content += f'**contest link: [{info[DICT.LINK]}]({info[DICT.LINK]})**\n'
     if info[DICT.DETAIL]:
@@ -35,7 +35,7 @@ def createReadme(address):
     
     # cerate problem test case section
     if info[DICT.PROBLEMS]:
-        content += f'\n## 📝 Problem Specifications\n\n'
+        content += f'\n## Problem Specifications\n\n'
         content += '<div align="center">\n\n'
         content += "| letter | name | status |\n"
         content += '|:---:|:---:|:---:|\n'
@@ -45,7 +45,7 @@ def createReadme(address):
             content += f'|{problem[DICT.STATUS]}|\n'
         content += '</div>\n\n'
 
-    content += '<br><details><summary><strong>📊 Test Cases (click to expand)</strong></summary>\n\n'
+    content += '<br><details><summary><strong> Test Cases (click to expand)</strong></summary>\n\n'
     for problem in info[DICT.PROBLEMS]:
         content += f'### problem {problem[DICT.LETTER].upper()}\n'
         tc_folder = os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER, problem[DICT.LETTER])
@@ -67,11 +67,11 @@ def createReadme(address):
     content += '\n</details>'
 
     # create about me section and about rcph
-    content += '\n\n### ⚡ About Me\n'
+    content += '\n\n### About Me\n'
     sign = getSign()
     for line in sign:
         content += f'* **{line.strip()}**\n'
 
-    content += '\n💡 ***see more about rcph in [our repository +](https://github.com/EnAnsari/cph)***\n'
+    content += '\n***see more about rcph in [our repository +](https://github.com/EnAnsari/cph)***\n'
 
     return content + '\n'

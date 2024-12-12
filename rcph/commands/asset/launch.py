@@ -23,7 +23,7 @@ def explore(dir):
     
     while True:
         try:
-            user_input = prompt(f"{curr_show}> ", completer=completer, style=style, history=history).strip()
+            user_input = prompt(f"{curr_show.replace('\\', '/')}> ", completer=completer, style=style, history=history).strip()
             path = os.path.join(curr, *user_input.split('/'))
 
             # handle empty input
@@ -43,7 +43,7 @@ def explore(dir):
             elif all(char == '.' for char in user_input):
                 for _ in range(len(user_input) - 1): # for each extra . after .. we are back one directory
                     if curr != dir:
-                        curr = os.path.dirname(curr)                   
+                        curr = os.path.dirname(curr)
                         curr_show = os.path.dirname(curr_show)
             
             # handle ~ command
@@ -102,7 +102,6 @@ def getAssetFile():
         des = os.path.basename(file_path)
     
     des_path = pathlib.Path(os.path.join(os.getcwd(), DATA.ASSET_FOLDER, *des.split('/')[:-1])).resolve()
-    print(des_path)
     os.makedirs(des_path, exist_ok=True)
 
     des_path = os.path.join(des_path, des.split('/')[-1])
