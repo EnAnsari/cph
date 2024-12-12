@@ -25,8 +25,13 @@ def getSoup():
     # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
+
+    connection = getConnection()
+    if not DATA.CHROMEDRIVER in connection or not os.path.exists(connection[DATA.CHROMEDRIVER]):
+        raise Exception('chrome driver not exist! please connect somewhere first!')
+    
     try:
-        chromedrive_path = getConnection()[DATA.CHROMEDRIVER]
+        chromedrive_path = connection[DATA.CHROMEDRIVER]
         service = Service(chromedrive_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
     except Exception as e:
