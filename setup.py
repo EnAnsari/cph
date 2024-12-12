@@ -8,7 +8,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 # create data address file
 with open(os.path.join('rcph', 'config', 'data.py'), 'w') as file:
-    file.write(f"DATA_ADDRESS = \'{os.path.join(os.getcwd(), DATA_FOLDER).replace('\\', '/')}\'")
+    data_path = os.path.join(os.getcwd(), DATA_FOLDER).replace('\\', '/')
+    file.write(f"DATA_ADDRESS = \'{data_path}\'")
 
 setup(
     name="rcph",
