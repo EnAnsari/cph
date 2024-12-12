@@ -35,7 +35,7 @@ class DirectoryCompleter(Completer):
             items = list(self.db.keys())
     
         for item in items:
-            if item.startswith(text):
+            if item.lower().startswith(text.lower()):
                 if parent:
                     yield Completion(item, start_position=-len(text), style='fg:ansiblue bold')
                 else:

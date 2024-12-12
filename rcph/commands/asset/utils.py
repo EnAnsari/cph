@@ -22,7 +22,7 @@ class DirectoryCompleter(Completer):
             items = []
         
         for item in items:
-            if item.startswith(text):
+            if item.lower().startswith(text.lower()):
                 if os.path.isdir(os.path.join(self.get_cwd(), item)):
                     yield Completion(item, start_position=-len(text), style='fg:ansiblue bold')
                 else:
