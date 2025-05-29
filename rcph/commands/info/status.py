@@ -34,3 +34,23 @@ def setMultiStatus():
     for p in info[DICT.PROBLEMS]:
         print(colored_text(f'problem {p[DICT.LETTER]} status was: {p[DICT.STATUS]}...', 'magneta'))
         setStatus(p[DICT.LETTER])
+        
+
+def queraEdit(problem):
+    info = getInfo()
+    try:
+        name = input(colored_text(f'Enter name of problem {problem}: ', 'yellow'))
+        percentage = int(input(colored_text('Enter percentage (between 0 and 100): ', 'yellow')))
+        if not 0 <= percentage and percentage <= 100:
+            raise Exception('your percentage is invalid')
+        link = input(colored_text('Enter link of problem: ', 'yellow'))
+    except:
+        raise Exception(f'your input isn\'t standard!')
+    
+    for p in info[DICT.PROBLEMS]:
+        if p[DICT.LETTER] == problem:
+            p[DICT.NAME] = name if name else p[DICT.NAME]
+            p[DICT.PERCENTAGE] = percentage
+            p[DICT.LINK] = link if link else p[DICT.LINK]
+
+    setInfo(info)

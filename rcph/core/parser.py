@@ -70,6 +70,7 @@ def create_parser():
         arguments=[
             {"args": ["operation"], "kwargs": {"help": "operation add or remove"}},
             {"args": ["problem"], "kwargs": {"help": "problem letter"}},
+            {"args": ["quera"], "kwargs": {"nargs": "?", "help": "is it a quera problem?"}},
         ],
     )
     add_subcommand("asset", asset_runner, "Asset file bringer", aliases=["ass"],

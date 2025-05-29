@@ -35,7 +35,7 @@ def getSoup():
         service = Service(chromedrive_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
     except Exception as e:
-        raise Exception(f'chrome driver path in connection.json is incorrect!')
+        raise Exception(f'chrome driver path in connection.json is incorrect!, {e}')
 
     try:
         # Open the page

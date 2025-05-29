@@ -18,6 +18,8 @@ def makeLocalConfig(contest_path, contest_link, parent, problems):
             DICT.LETTER: problem_letter,
             DICT.NAME: '',
             DICT.STATUS: DICT.NULL,
+            DICT.PERCENTAGE: 0,
+            DICT.LINK: '' 
         }
         
         data[DICT.PROBLEMS].append(problem)

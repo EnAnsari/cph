@@ -10,7 +10,28 @@ def addProblem(problem):
     info[DICT.PROBLEMS].append({
         DICT.LETTER: problem,
         DICT.NAME: '',
-        DICT.STATUS: DICT.NULL
+        DICT.STATUS: DICT.NULL,
+        DICT.PERCENTAGE: 0,
+        DICT.LINK: ''
+    })
+    setInfo(info)
+    with open(os.path.join(os.getcwd(), problem + '.cpp'), 'w') as problem_code:
+        problem_code.write(getProblemScript(os.getcwd(), problem))
+    os.mkdir(os.path.join(os.getcwd(), CURRENT.RCPH_FOLDER, CURRENT.TESTCASE_FOLDER, problem))
+    print(colored_text(f'problem {problem} successfully added!', 'green'))
+
+def queraAddProblem(problem):
+    info = getInfo()
+
+    name = input(colored_text('Enter problem name: ', 'yellow'))
+    link = input(colored_text('Enter problem link: ', 'yellow'))
+
+    info[DICT.PROBLEMS].append({
+        DICT.LETTER: problem,
+        DICT.NAME: name,
+        DICT.STATUS: DICT.NULL,
+        DICT.PERCENTAGE: 0,
+        DICT.LINK: link
     })
     setInfo(info)
     with open(os.path.join(os.getcwd(), problem + '.cpp'), 'w') as problem_code:

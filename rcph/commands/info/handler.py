@@ -1,7 +1,7 @@
 from rcph.utils.launcher import currentIsContest
 from .info import showInfo
 from .edit import editContest
-from .status import setMultiStatus, setStatus, problemCheck
+from .status import setMultiStatus, setStatus, problemCheck, queraEdit
 from .parent import showParents, addParent, chooseParent
 from .db import showDBstatus, add2DB, rm2DB
 
@@ -18,6 +18,12 @@ def run(args):
             elif args.subcommand2:
                 problemCheck(args.subcommand2)
                 setStatus(args.subcommand2)
+            else:
+                raise Exception(f'subcommand2 (problem letter) is required!')
+        elif args.subcommand1 == 'quera':
+            if args.subcommand2:
+                problemCheck(args.subcommand2)
+                queraEdit(args.subcommand2)
             else:
                 raise Exception(f'subcommand2 (problem letter) is required!')
         elif args.subcommand1 == 'parent':

@@ -54,6 +54,7 @@ class DICT:
     PATH = 'path'
     PROBLEMS = 'problems'
     STATUS = 'status'
+    PERCENTAGE = 'percentage'
     NULL = 'null'
     TOP = ['top', 'up']
 

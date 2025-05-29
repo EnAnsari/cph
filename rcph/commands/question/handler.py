@@ -1,4 +1,4 @@
-from .utils import addProblem, addMultiProblems, delProblem, delMultiProblems
+from .utils import addProblem, addMultiProblems, delProblem, delMultiProblems, queraAddProblem
 from rcph.utils.launcher import currentIsContest, checkExistenceProblem
 from rcph.config.constant import *
 
@@ -12,7 +12,10 @@ def run(args):
         elif checkExistenceProblem(args.problem):
             raise Exception(f'problem {args.problem} exist before!')
         else:
-            addProblem(args.problem)
+            if args.quera:
+                queraAddProblem(args.problem)
+            else:
+                addProblem(args.problem)
     elif args.operation in COMMANDS.DELETE:
         if args.problem == '.':
             delMultiProblems()

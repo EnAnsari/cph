@@ -20,12 +20,23 @@ def showStatus(status):
     
     return colored_text(status, color, 'bold')
 
+def showPercentage(percentage):
+    if percentage == 0:
+        color = 'red'
+    elif percentage == 100:
+        color = 'green'
+    else:
+        color = 'yellow'
+    return f"{colored_text(percentage, color, 'bold')}%"
+
 def showProblemInfo(problem):
     print(
         colored_text(problem[DICT.LETTER].upper(), 'yellow'), '\t',
         colored_text(problem[DICT.NAME], 'blue') if problem[DICT.NAME] else colored_text('-no name-', 'yellow'), '\t',
         colored_text(f'tc num: {testCounter(problem[DICT.LETTER])}', 'cyan'), '\t',
-        'status:', showStatus(problem[DICT.STATUS]) 
+        'status:', showStatus(problem[DICT.STATUS]), '\t',
+        showPercentage(problem[DICT.PERCENTAGE]),
+        f'{colored_text(problem[DICT.LINK], "blue")}' if problem[DICT.LINK] else ''
     )
 
 def showInfo(info_arg=None):
